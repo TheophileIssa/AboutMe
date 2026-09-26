@@ -126,19 +126,29 @@ function loadVisualEditor(){
   frame.src=pageUrl(currentPage)+"?cms_editor=1&t="+Date.now();
   setTimeout(scan,2400);
 }
+
 function renderPages(){
   const v=document.getElementById("view"),p=data.cms.pages[currentPage]||{heroTitle:"",heroText:"",heroImage:"",introTitle:"",introText:"",introImage:""};
-  const mediaOptions=['<option value="'+esc(p.heroImage||"")+'">Image actuelle</option>',...(data.cms.media||[]).map(m=>'<option value="'+esc(m.url)+'">'+esc(m.name)+'</option>')].join("");
-  const introOptions=['<option value="'+esc(p.introImage||"")+'">Image actuelle</option>',...(data.cms.media||[]).map(m=>'<option value="'+esc(m.url)+'">'+esc(m.name)+'</option>')].join("");
-  v.innerHTML='<div class="section-tabs">'+Object.keys(data.cms.pages).map(k=>'<button class="'+(k===currentPage?"active":"")+'" data-page="'+k+'">'+(pageLabels[k]||k)+'</button>').join("")+'</div><section class="panel"><div class="panel-head"><div><h2>'+(pageLabels[currentPage]||currentPage)+'</h2><p>Raccourcis pour les contenus principaux de cette page.</p></div><a class="btn-sm light" href="'+pageUrl(currentPage)+'" target="_blank">Voir la page ↗</a></div><div class="page-preview" style="background-image:url(\''+esc(p.heroImage||"")+'\')"><div><h3>'+esc(p.heroTitle||"")+'</h3><p>'+esc(p.heroText||"")+'</p></div></div><form id="pageForm"><div class="grid2"><div class="field"><label>Titre principal</label><input name="heroTitle" value="'+esc(p.heroTitle||"")+'"></div><div class="field"><label>Image du hero</label><select name="heroImage">'+mediaOptions+'</select></div></div><div class="field" style="margin-top:10px"><label>Texte du hero</label><textarea name="heroText" rows="3">'+esc(p.heroText||"")+'</textarea></div><hr style="border:0;border-top:1px solid #edf1f6;margin:18px 0"><div class="grid2"><div class="field"><label>Titre d’introduction</label><input name="introTitle" value="'+esc(p.introTitle||"")+'"></div><div class="field"><label>Image d’introduction</label><select name="introImage">'+introOptions+'</select></div></div><div class="field" style="margin-top:10px"><label>Texte d’introduction</label><textarea name="introText" rows="4">'+esc(p.introText||"")+'</textarea></div><div class="actions" style="margin-top:14px"><button class="btn-sm primary">Enregistrer les raccourcis</button><button type="button" class="btn-sm light" id="uploadHero">Médiathèque</button></div></form></section><section class="panel"><div class="panel-head"><div><h2>Aperçu en direct</h2><p>Le CMS scanne la page rendue, y compris les cartes dynamiques, pour rendre chaque texte et chaque image modifiable.</p></div><button class="btn-sm light" id="rescanPage">Rescanner</button></div><iframe id="cmsPageFrame" class="cms-page-frame" title="Aperçu de la page"></iframe></section><section class="panel" id="fullEditor"><div class="notice">Chargement de tous les textes et images de la page…</div></section><section class="panel" id="blockBuilder"></section>';
+  v.innerHTML='<div class="section-tabs">'+Object.keys(data.cms.pages).map(k=>'<button class="'+(k===currentPage?"active":"")+'" data-page="'+k+'">'+(pageLabels[k]||k)+'</button>').join("")+'</div>'+
+  '<section class="panel"><div class="panel-head"><div><h2>'+(pageLabels[currentPage]||currentPage)+'</h2><p>Raccourcis pour les contenus principaux de cette page.</p></div><a class="btn-sm light" href="'+pageUrl(currentPage)+'" target="_blank">Voir la page ↗</a></div>'+
+  '<div class="page-preview" style="background-image:url(\''+esc(p.heroImage||"")+'\')"><div><h3>'+esc(p.heroTitle||"")+'</h3><p>'+esc(p.heroText||"")+'</p></div></div>'+
+  '<form id="pageForm"><div class="grid2"><div class="field"><label>Titre principal</label><input name="heroTitle" value="'+esc(p.heroTitle||"")+'"></div>'+
+  imagePicker({label:"Image du hero",value:p.heroImage||"",name:"heroImage"})+
+  '</div><div class="field" style="margin-top:10px"><label>Texte du hero</label><textarea name="heroText" rows="3">'+esc(p.heroText||"")+'</textarea></div>'+
+  '<hr style="border:0;border-top:1px solid #edf1f6;margin:18px 0"><div class="grid2"><div class="field"><label>Titre d’introduction</label><input name="introTitle" value="'+esc(p.introTitle||"")+'"></div>'+
+  imagePicker({label:"Image d’introduction",value:p.introImage||"",name:"introImage"})+
+  '</div><div class="field" style="margin-top:10px"><label>Texte d’introduction</label><textarea name="introText" rows="4">'+esc(p.introText||"")+'</textarea></div>'+
+  '<div class="actions" style="margin-top:14px"><button class="btn-sm primary">Enregistrer les raccourcis</button><button type="button" class="btn-sm light" id="uploadHero">Médiathèque</button></div></form></section>'+
+  '<section class="panel"><div class="panel-head"><div><h2>Aperçu en direct</h2><p>Le CMS scanne la page rendue, y compris les cartes dynamiques, pour rendre chaque texte et chaque image modifiable.</p></div><button class="btn-sm light" id="rescanPage">Rescanner</button></div><iframe id="cmsPageFrame" class="cms-page-frame" title="Aperçu de la page"></iframe></section>'+
+  '<section class="panel" id="fullEditor"><div class="notice">Chargement de tous les textes et images de la page…</div></section><section class="panel" id="blockBuilder"></section>';
   document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>{currentPage=b.dataset.page;renderPages()});
+  bindImagePickers(document.getElementById("pageForm"));
   document.getElementById("pageForm").onsubmit=async e=>{e.preventDefault();try{await api("/api/admin/pages/"+currentPage,{method:"PUT",body:JSON.stringify(Object.fromEntries(new FormData(e.target)))});toast("Page mise à jour");await refresh(false);renderPages()}catch(err){toast(err.message)}};
   document.getElementById("uploadHero").onclick=()=>{currentView="media";shell()};
   document.getElementById("rescanPage").onclick=loadVisualEditor;
   renderBlockBuilder();
   loadVisualEditor();
 }
-
 async function persistBlocks(blocks){
   await api("/api/admin/pages/"+currentPage,{method:"PUT",body:JSON.stringify({blocks})});
   await refresh(false);
