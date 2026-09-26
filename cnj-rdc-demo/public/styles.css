@@ -153,3 +153,22 @@
   .brand-logo{width:185px;height:54px}
   .footer .brand-logo{width:220px;height:76px}
 }
+
+/* Larger, more legible supplied CNJ SVG */
+.nav{min-height:116px}
+.brand{min-width:330px}
+.brand-logo{width:325px;height:108px}
+.brand-logo img{width:100%;height:100%;object-fit:contain;object-position:left center}
+.nav-menu{gap:0}
+.nav-menu a{font-size:12px;padding:10px 7px}
+.footer .brand-logo{width:370px;height:132px;padding:8px}
+@media(max-width:1180px){
+  .nav-menu{display:none}
+  .mobile-toggle{display:block}
+  .brand{min-width:0}
+}
+@media(max-width:760px){
+  .nav{min-height:88px}
+  .brand-logo{width:235px;height:82px}
+  .footer .brand-logo{width:285px;height:102px}
+}
