@@ -1,1 +1,12 @@
-{"name":"cnj-rdc-demo","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.mjs"},"engines":{"node":">=20"}}
+{
+  "name": "cnj-rdc-premium-demo",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": "20.x"
+  }
+}
