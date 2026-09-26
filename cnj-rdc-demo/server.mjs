@@ -89,17 +89,17 @@ const state = {
     {name:"MUKENDI MBUYI Daniel",role:"Porte-parole et Conseiller chargé de Communication et Médias",initials:"MD"}
   ],
   officialDocuments: [
-    {title:"Charte Africaine de la Jeunesse",kind:"Référence continentale",url:"https://cnj.cd/"},
-    {title:"Résolution 2250 du Conseil de sécurité",kind:"Jeunesse, paix et sécurité",url:"https://cnj.cd/wp-content/uploads/2025/12/Resolution_2250_2015_UN-1.pdf"},
-    {title:"Politique Nationale de la Jeunesse",kind:"Cadre national",url:"https://cnj.cd/"},
-    {title:"Plan stratégique du CNJ",kind:"Orientation stratégique",url:"https://cnj.cd/"}
+    {title:"Charte Africaine de la Jeunesse",kind:"Référence continentale",url:"/resources.html#official"},
+    {title:"Résolution 2250 du Conseil de sécurité",kind:"Jeunesse, paix et sécurité",url:"/resources.html#official"},
+    {title:"Politique Nationale de la Jeunesse",kind:"Cadre national",url:"/resources.html#official"},
+    {title:"Plan stratégique du CNJ",kind:"Orientation stratégique",url:"/resources.html#official"}
   ],
   officialNews: [
-    {date:"18 avr. 2026",category:"Actualités",title:"RDC – Jeunesse et MONUSCO : une rencontre stratégique pour renforcer la paix et la collaboration",url:"https://cnj.cd/"},
-    {date:"23 déc. 2025",category:"Actualités",title:"Kolwezi : lancement officiel du Symposium de la Jeunesse du Lualaba avec la Fondation MAP",url:"https://cnj.cd/"},
-    {date:"22 déc. 2025",category:"Actualités",title:"Bureau CNJ-RDC : séance de travail pour la planification du plan d’action 2026 en faveur de la jeunesse",url:"https://cnj.cd/"},
-    {date:"6 nov. 2025",category:"Actualités",title:"Je suis jeune, je m’engage pour la reconnaissance du Génocost",url:"https://cnj.cd/"},
-    {date:"4 nov. 2025",category:"Actualités",title:"Participation du CNJ-RDC au Closing Day de l’Entrepreneuriat 2025",url:"https://cnj.cd/"}
+    {date:"18 avr. 2026",category:"Actualités",title:"RDC – Jeunesse et MONUSCO : une rencontre stratégique pour renforcer la paix et la collaboration",url:"/news.html"},
+    {date:"23 déc. 2025",category:"Actualités",title:"Kolwezi : lancement officiel du Symposium de la Jeunesse du Lualaba avec la Fondation MAP",url:"/news.html"},
+    {date:"22 déc. 2025",category:"Actualités",title:"Bureau CNJ-RDC : séance de travail pour la planification du plan d’action 2026 en faveur de la jeunesse",url:"/news.html"},
+    {date:"6 nov. 2025",category:"Actualités",title:"Je suis jeune, je m’engage pour la reconnaissance du Génocost",url:"/news.html"},
+    {date:"4 nov. 2025",category:"Actualités",title:"Participation du CNJ-RDC au Closing Day de l’Entrepreneuriat 2025",url:"/news.html"}
   ],
   partners: ["La Présidence","PNUD","CNSSAP","UNFPA","Glorhis MS SARL","UNESCO","CIDE"],
   messages: [],
