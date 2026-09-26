@@ -166,12 +166,12 @@ const server=http.createServer(async(req,res)=>{
 
     for(const [name,key] of [["opportunities","opportunities"],["news","news"],["programs","programs"],["resources","resources"],["events","events"],["consultations","consultations"]]){
       const r=collectionRoute(u.pathname,name);if(!r)continue;
-      if(req.method==="POST"&&r.action==="collection"){const b=sanitize(await body(req));const rec={id:uid(name.slice(0,2)),...b};state[key].unshift(rec);return send(res,201,{ok:true,record:rec});}
-      if(req.method==="PUT"&&r.action==="item"){const i=state[key].findIndex(x=>x.id===r.id);if(i<0)return send(res,404,{error:"Élément introuvable"});state[key][i]={...state[key][i],...sanitize(await body(req)),id:r.id};return send(res,200,{ok:true,record:state[key][i]});}
-      if(req.method==="DELETE"&&r.action==="item"){state[key]=state[key].filter(x=>x.id!==r.id);return send(res,200,{ok:true});}
+      if(req.method==="POST"&&r.action==="collection"){const b=sanitize(await body(req));const rec={id:uid(name.slice(0,2)),...b};state[key].unshift(rec);await saveCms();return send(res,201,{ok:true,record:rec});}
+      if(req.method==="PUT"&&r.action==="item"){const i=state[key].findIndex(x=>x.id===r.id);if(i<0)return send(res,404,{error:"Élément introuvable"});state[key][i]={...state[key][i],...sanitize(await body(req)),id:r.id};await saveCms();return send(res,200,{ok:true,record:state[key][i]});}
+      if(req.method==="DELETE"&&r.action==="item"){state[key]=state[key].filter(x=>x.id!==r.id);await saveCms();return send(res,200,{ok:true});}
     }
 
-    if(req.method==="PATCH"&&u.pathname.startsWith("/api/admin/organizations/")){const id=u.pathname.split("/").pop(),b=sanitize(await body(req)),rec=state.orgRequests.find(x=>x.id===id);if(!rec)return send(res,404,{error:"Demande introuvable"});rec.status=b.status==="approved"?"approved":"rejected";if(rec.status==="approved"&&!state.organizations.some(x=>x.name===rec.name))state.organizations.push({id:uid("org"),name:rec.name,province:rec.province,domain:rec.domain||"Autre",status:"verified"});return send(res,200,{ok:true,record:rec});}
+    if(req.method==="PATCH"&&u.pathname.startsWith("/api/admin/organizations/")){const id=u.pathname.split("/").pop(),b=sanitize(await body(req)),rec=state.orgRequests.find(x=>x.id===id);if(!rec)return send(res,404,{error:"Demande introuvable"});rec.status=b.status==="approved"?"approved":"rejected";if(rec.status==="approved"&&!state.organizations.some(x=>x.name===rec.name))state.organizations.push({id:uid("org"),name:rec.name,province:rec.province,domain:rec.domain||"Autre",status:"verified"});await saveCms();return send(res,200,{ok:true,record:rec});}
 
     return serveStatic(res,u.pathname);
   }catch(err){console.error(err);return send(res,500,{error:"Erreur serveur"});}
