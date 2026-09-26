@@ -60,6 +60,47 @@ const state = {
     {id:"org3",name:"Jeunesse Verte du Kivu",province:"Sud-Kivu",domain:"Environnement",status:"verified"},
     {id:"org4",name:"Plateforme Leadership Jeune",province:"Kongo-Central",domain:"Citoyenneté",status:"verified"}
   ],
+  missions: [
+    {id:"m1",title:"Représenter",text:"Représenter la jeunesse congolaise auprès des pouvoirs publics, des institutions et des partenaires techniques et financiers.",icon:"01"},
+    {id:"m2",title:"Coordonner",text:"Coordonner les structures et mouvements de jeunesse à l’échelle nationale.",icon:"02"},
+    {id:"m3",title:"Promouvoir",text:"Promouvoir les initiatives économiques, sociales et culturelles des jeunes.",icon:"03"},
+    {id:"m4",title:"Renforcer les capacités",text:"Renforcer les capacités des jeunes à travers la formation et l’encadrement.",icon:"04"},
+    {id:"m5",title:"Favoriser la participation",text:"Favoriser l’autonomisation et la participation citoyenne des jeunes à la gouvernance locale et nationale.",icon:"05"}
+  ],
+  values: [
+    {title:"Leadership & responsabilité",text:"Encourager une jeunesse capable d’assumer des responsabilités et de porter des initiatives structurantes."},
+    {title:"Intégrité & transparence",text:"Promouvoir une culture de confiance, de redevabilité et de gestion responsable."},
+    {title:"Solidarité & inclusion",text:"Créer des espaces où toutes les catégories de jeunes peuvent participer et être représentées."},
+    {title:"Innovation & engagement citoyen",text:"Valoriser les solutions nouvelles et l’implication active des jeunes dans la vie publique."}
+  ],
+  structure: [
+    {value:"26",label:"Conseils provinciaux"},
+    {value:"137",label:"Conseils urbains"},
+    {value:"174",label:"Conseils communaux"},
+    {value:"145",label:"Conseils territoriaux"},
+    {value:"471",label:"Conseils de secteurs"},
+    {value:"5 908",label:"Conseils de groupements"},
+    {value:"11 000+",label:"Organisations membres"}
+  ],
+  leadership: [
+    {name:"Claude MBUYI",role:"Président du Conseil National de la Jeunesse",initials:"CM"},
+    {name:"Christenvie MELLY",role:"Vice-Présidente chargée du genre",initials:"CM"},
+    {name:"MUKENDI MBUYI Daniel",role:"Porte-parole et Conseiller chargé de Communication et Médias",initials:"MD"}
+  ],
+  officialDocuments: [
+    {title:"Charte Africaine de la Jeunesse",kind:"Référence continentale",url:"https://cnj.cd/"},
+    {title:"Résolution 2250 du Conseil de sécurité",kind:"Jeunesse, paix et sécurité",url:"https://cnj.cd/wp-content/uploads/2025/12/Resolution_2250_2015_UN-1.pdf"},
+    {title:"Politique Nationale de la Jeunesse",kind:"Cadre national",url:"https://cnj.cd/"},
+    {title:"Plan stratégique du CNJ",kind:"Orientation stratégique",url:"https://cnj.cd/"}
+  ],
+  officialNews: [
+    {date:"18 avr. 2026",category:"Actualités",title:"RDC – Jeunesse et MONUSCO : une rencontre stratégique pour renforcer la paix et la collaboration",url:"https://cnj.cd/"},
+    {date:"23 déc. 2025",category:"Actualités",title:"Kolwezi : lancement officiel du Symposium de la Jeunesse du Lualaba avec la Fondation MAP",url:"https://cnj.cd/"},
+    {date:"22 déc. 2025",category:"Actualités",title:"Bureau CNJ-RDC : séance de travail pour la planification du plan d’action 2026 en faveur de la jeunesse",url:"https://cnj.cd/"},
+    {date:"6 nov. 2025",category:"Actualités",title:"Je suis jeune, je m’engage pour la reconnaissance du Génocost",url:"https://cnj.cd/"},
+    {date:"4 nov. 2025",category:"Actualités",title:"Participation du CNJ-RDC au Closing Day de l’Entrepreneuriat 2025",url:"https://cnj.cd/"}
+  ],
+  partners: ["La Présidence","PNUD","CNSSAP","UNFPA","Glorhis MS SARL","UNESCO","CIDE"],
   messages: [],
   newsletter: [],
   orgRequests: [],
@@ -130,7 +171,14 @@ function publicPayload(){
     events:state.events,
     consultations:state.consultations,
     resources:state.resources,
-    organizations:state.organizations
+    organizations:state.organizations,
+    missions:state.missions,
+    values:state.values,
+    structure:state.structure,
+    leadership:state.leadership,
+    officialDocuments:state.officialDocuments,
+    officialNews:state.officialNews,
+    partners:state.partners
   };
 }
 async function serveStatic(req,res,urlPath){
