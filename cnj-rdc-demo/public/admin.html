@@ -32,5 +32,31 @@
 .cms-block-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.cms-block-card{display:grid;grid-template-columns:150px 1fr;border:1px solid #e1e8f0;border-radius:14px;overflow:hidden;background:#fff}.cms-block-card__thumb{min-height:135px;background:#eef4fa;display:grid;place-items:center}.cms-block-card__thumb img{width:100%;height:100%;object-fit:cover}.cms-block-card__thumb span{font:800 10px Montserrat;color:#668}.cms-block-card__body{padding:13px;min-width:0}.cms-block-card__body small{font-size:8px;color:#0b63ce;font-weight:900}.cms-block-card__body h3{font:800 13px Montserrat;margin:6px 0}.cms-block-card__body p{font-size:9px;color:#6d7e94;line-height:1.5}.cms-block-card button:disabled{opacity:.35;cursor:not-allowed}
 @media(max-width:900px){.cms-block-list{grid-template-columns:1fr}.cms-block-card{grid-template-columns:110px 1fr}}
 @media(max-width:600px){.cms-section-row{align-items:flex-start;flex-direction:column}.cms-block-card{grid-template-columns:1fr}.cms-block-card__thumb{height:180px}}
+</style>
+<style>
+.cms-image-picker{display:grid;gap:8px}
+.cms-dropzone{display:grid;grid-template-columns:112px 1fr;gap:12px;align-items:center;min-height:112px;padding:10px;border:2px dashed #b8c9df;border-radius:14px;background:#f8fbff;cursor:pointer;transition:.2s}
+.cms-dropzone:hover,.cms-dropzone.dragging{border-color:#0b63ce;background:#eef6ff;box-shadow:0 0 0 3px rgba(11,99,206,.08)}
+.cms-dropzone.uploading,.cms-gallery-drop.uploading,.cms-media-drop.uploading{opacity:.68;pointer-events:none}
+.cms-drop-preview{height:88px;border-radius:10px;overflow:hidden;background:#eaf0f7;display:grid;place-items:center;color:#6d7e94;font-size:28px}
+.cms-drop-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.cms-drop-copy{display:grid;gap:3px}.cms-drop-copy b{font:800 11px Montserrat;color:#10213d}.cms-drop-copy span{font-size:9px;color:#60728a}.cms-drop-copy small{font-size:8px;color:#94a3b6}
+.cms-image-picker-controls{display:grid;grid-template-columns:1fr auto;gap:7px}.cms-image-picker-controls select{min-width:0;border:1px solid #dce5f0;border-radius:9px;padding:9px;background:#fff;font-size:9px}
+.cms-image-picker--compact .cms-dropzone{min-height:92px;grid-template-columns:92px 1fr}.cms-image-picker--compact .cms-drop-preview{height:70px}
+.cms-gallery-picker{display:grid;gap:7px}.cms-gallery-picker>label{font-size:9px;font-weight:900;color:#65758d}
+.cms-gallery-drop{border:2px dashed #b8c9df;border-radius:14px;padding:12px;background:#f8fbff;cursor:pointer;display:grid;gap:10px;transition:.2s}
+.cms-gallery-drop:hover,.cms-gallery-drop.dragging{border-color:#0b63ce;background:#eef6ff}
+.cms-gallery-drop b{font:800 10px Montserrat}.cms-gallery-drop small{display:block;font-size:8px;color:#708199;margin-top:3px}
+.cms-gallery-previews{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;min-height:68px}.cms-gallery-previews img{width:100%;height:68px;object-fit:cover;border-radius:8px}.cms-gallery-previews>span{grid-column:1/-1;display:grid;place-items:center;min-height:68px;background:#edf2f7;border-radius:8px;font-size:9px;color:#8190a3}
+.cms-media-drop{min-height:220px;border:2px dashed #aebfd6;border-radius:20px;background:linear-gradient(145deg,#f7fbff,#eef5ff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;cursor:pointer;transition:.2s}
+.cms-media-drop:hover,.cms-media-drop.dragging{border-color:#0b63ce;background:#eaf4ff;transform:translateY(-1px)}
+.cms-media-drop__icon{width:58px;height:58px;border-radius:17px;background:#0b63ce;color:white;display:grid;place-items:center;font-size:28px;font-weight:900}
+.cms-media-drop b{font:800 16px Montserrat;color:#10213d}.cms-media-drop span{display:block;font-size:10px;color:#5f7189;margin-top:4px}.cms-media-drop small{display:block;font-size:8px;color:#91a0b2;margin-top:4px}
+.cms-upload-status{padding-top:10px;font-size:9px;color:#60728a}
+@media(max-width:700px){
+  .cms-dropzone{grid-template-columns:1fr}.cms-drop-preview{height:160px}.cms-image-picker-controls{grid-template-columns:1fr}
+  .cms-gallery-previews{grid-template-columns:repeat(2,1fr)}
+  .cms-media-drop{min-height:180px;padding:20px}
+}
 </style></head>
 <body><div id="app"></div><div class="toast" id="toast"></div><script src="/admin.js"></script></body></html>
