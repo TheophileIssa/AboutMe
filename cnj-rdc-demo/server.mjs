@@ -38,7 +38,8 @@ const defaultCms={
     resources:{heroTitle:"Une bibliothèque pour comprendre et agir.",heroText:"Documents institutionnels, guides, politiques, rapports, publications, kits pratiques et références pour la jeunesse.",heroImage:"https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1600&q=88",introTitle:"Les ressources essentielles au même endroit.",introText:"Une bibliothèque classée, recherchable et maintenable depuis le back-office.",introImage:"https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=85"},
     contact:{heroTitle:"Parler au CNJ, simplement.",heroText:"Questions, demandes d’orientation, propositions de partenariat, organisations de jeunesse et initiatives.",heroImage:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=88",introTitle:"Comment pouvons-nous vous orienter ?",introText:"Un point d’entrée clair pour les jeunes, organisations et partenaires.",introImage:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85"}
   },
-  media:[]
+  media:[],
+  overrides:{}
 };
 
 const state={
@@ -83,9 +84,22 @@ const state={
 let cms=structuredClone(defaultCms);
 try{
   const saved=JSON.parse(await readFile(CMS_FILE,"utf8"));
-  cms={...cms,...saved,settings:{...cms.settings,...(saved.settings||{})},pages:{...cms.pages,...(saved.pages||{})}};
+  cms={
+    ...cms,
+    ...saved,
+    settings:{...cms.settings,...(saved.settings||{})},
+    pages:{...cms.pages,...(saved.pages||{})},
+    media:Array.isArray(saved.media)?saved.media:cms.media,
+    overrides:{...cms.overrides,...(saved.overrides||{})}
+  };
 }catch{}
-async function saveCms(){await writeFile(CMS_FILE,JSON.stringify(cms,null,2),"utf8");}
+cms.settings.logo="/assets/cnj-logo-current.svg";
+const persistedKeys=["programs","opportunities","news","events","consultations","resources","organizations"];
+if(cms.collections){
+  for(const k of persistedKeys) if(Array.isArray(cms.collections[k])) state[k]=cms.collections[k];
+}
+function syncCollections(){cms.collections=Object.fromEntries(persistedKeys.map(k=>[k,state[k]]));}
+async function saveCms(){syncCollections();cms.settings.logo="/assets/cnj-logo-current.svg";await writeFile(CMS_FILE,JSON.stringify(cms,null,2),"utf8");}
 
 const accounts=[
   {id:"u_youth",role:"youth",name:"Jeune Démo",email:"jeune@demo.cnj.cd",password:"Jeune2026!"},
@@ -153,6 +167,7 @@ const server=http.createServer(async(req,res)=>{
     if(req.method==="GET"&&u.pathname==="/api/admin/cms")return send(res,200,{cms});
     if(req.method==="PUT"&&u.pathname==="/api/admin/settings"){cms.settings={...cms.settings,...sanitize(await body(req))};await saveCms();return send(res,200,{ok:true,settings:cms.settings});}
     if(req.method==="PUT"&&u.pathname.startsWith("/api/admin/pages/")){const key=u.pathname.split("/").pop();if(!cms.pages[key])return send(res,404,{error:"Page inconnue"});cms.pages[key]={...cms.pages[key],...sanitize(await body(req))};await saveCms();return send(res,200,{ok:true,page:cms.pages[key]});}
+    if(req.method==="PUT"&&u.pathname.startsWith("/api/admin/overrides/")){const key=u.pathname.split("/").pop();const b=await body(req,4_000_000);cms.overrides[key]={texts:b.texts||{},images:b.images||{}};await saveCms();return send(res,200,{ok:true,overrides:cms.overrides[key]});}
 
     if(req.method==="POST"&&u.pathname==="/api/admin/media"){
       const b=await body(req,16_000_000);const mime=String(b.mime||"");const ext=extFromMime(mime);
