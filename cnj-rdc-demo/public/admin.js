@@ -181,7 +181,31 @@ function renderBlockBuilder(){
   document.querySelectorAll("[data-block-down]").forEach(btn=>btn.onclick=async()=>{const i=blocks.findIndex(x=>x.id===btn.dataset.blockDown);if(i<0||i>=blocks.length-1)return;const arr=[...blocks];[arr[i+1],arr[i]]=[arr[i],arr[i+1]];await persistBlocks(arr)});
 }
 async function fileToData(file){return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}
-function renderMedia(){const v=document.getElementById("view");v.innerHTML='<section class="panel"><div class="panel-head"><div><h2>Médiathèque</h2><p>Uploadez des photos PNG, JPG ou WEBP (6 MB maximum).</p></div></div><div class="notice">Les médias de cette démo sont stockés sur le disque du service Render. Ils peuvent être réinitialisés après un redéploiement. Pour la production, connecter un stockage permanent (S3/Cloudinary/Render Disk).</div><div class="upload-drop"><b>Ajouter une image</b><div style="font-size:9px;color:#6d7e94">Elle pourra ensuite être sélectionnée dans toutes les pages du CMS.</div><input id="mediaInput" type="file" accept="image/png,image/jpeg,image/webp"><button class="btn-sm primary" id="uploadBtn">Uploader</button></div></section><section class="panel"><div class="panel-head"><div><h2>Images disponibles</h2><p>'+data.cms.media.length+' média(s)</p></div></div><div class="media-grid">'+(data.cms.media.length?data.cms.media.map(m=>'<article class="media-item"><img src="'+esc(m.url)+'" alt=""><div><b>'+esc(m.name)+'</b><small>'+Math.round((m.size||0)/1024)+' KB</small><div class="actions"><button class="btn-sm light" data-copy="'+esc(m.url)+'">Copier URL</button><button class="btn-sm danger" data-delmedia="'+m.id+'">Supprimer</button></div></div></article>').join(""):'<p style="font-size:10px;color:#6d7e94">Aucune image uploadée pour le moment.</p>')+'</div></section>';document.getElementById("uploadBtn").onclick=async()=>{const file=document.getElementById("mediaInput").files[0];if(!file)return toast("Choisissez une image");try{const dataUrl=await fileToData(file);await api("/api/admin/media",{method:"POST",body:JSON.stringify({name:file.name,mime:file.type,data:dataUrl})});toast("Image uploadée");await refresh(false);renderMedia()}catch(err){toast(err.message)}};document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);toast("URL copiée")}catch{toast(b.dataset.copy)}});document.querySelectorAll("[data-delmedia]").forEach(b=>b.onclick=async()=>{if(!confirm("Supprimer cette image ?"))return;try{await api("/api/admin/media/"+b.dataset.delmedia,{method:"DELETE"});await refresh(false);renderMedia();toast("Image supprimée")}catch(err){toast(err.message)}})}
+
+function renderMedia(){
+  const v=document.getElementById("view");
+  v.innerHTML='<section class="panel"><div class="panel-head"><div><h2>Médiathèque</h2><p>Glissez-déposez vos photos ou cliquez pour les choisir.</p></div></div>'+
+  '<div class="notice">PNG, JPG ou WEBP · 6 MB maximum par image. Les images uploadées deviennent immédiatement disponibles dans les champs image du CMS.</div>'+
+  '<div class="cms-media-drop" id="mediaDrop" tabindex="0"><div class="cms-media-drop__icon">⇧</div><div><b>Déposez vos images ici</b><span>ou cliquez pour sélectionner plusieurs fichiers</span><small>Vous pouvez uploader plusieurs images en une seule fois.</small></div><input id="mediaInput" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden></div>'+
+  '<div id="mediaUploadStatus" class="cms-upload-status"></div></section>'+
+  '<section class="panel"><div class="panel-head"><div><h2>Images disponibles</h2><p>'+(data.cms.media||[]).length+' média(s)</p></div></div><div class="media-grid">'+((data.cms.media||[]).length?(data.cms.media||[]).map(m=>'<article class="media-item"><img src="'+esc(m.url)+'" alt=""><div><b>'+esc(m.name)+'</b><small>'+Math.round((m.size||0)/1024)+' KB</small><div class="actions"><button class="btn-sm light" data-copy="'+esc(m.url)+'">Copier l’adresse</button><button class="btn-sm danger" data-delmedia="'+m.id+'">Supprimer</button></div></div></article>').join(""):'<p style="font-size:10px;color:#6d7e94">Aucune image uploadée pour le moment.</p>')+'</div></section>';
+  const drop=document.getElementById("mediaDrop"),input=document.getElementById("mediaInput"),status=document.getElementById("mediaUploadStatus");
+  const uploadMany=async files=>{
+    const arr=[...files];if(!arr.length)return;
+    drop.classList.add("uploading");status.innerHTML='<b>Upload en cours…</b> '+arr.length+' fichier(s)';
+    let ok=0;
+    for(const file of arr){try{await uploadMediaFile(file);ok++;status.innerHTML='<b>Upload en cours…</b> '+ok+'/'+arr.length}catch(err){toast(file.name+" : "+err.message)}}
+    drop.classList.remove("uploading");toast(ok+" image(s) uploadée(s)");await refresh(false);renderMedia();
+  };
+  drop.onclick=()=>input.click();drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();input.click()}};
+  input.onchange=()=>uploadMany(input.files);
+  ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("dragging")}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("dragging")}));
+  drop.addEventListener("drop",e=>uploadMany(e.dataTransfer?.files||[]));
+  document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(b.dataset.copy);toast("Adresse copiée")}catch{toast(b.dataset.copy)}});
+  document.querySelectorAll("[data-delmedia]").forEach(b=>b.onclick=async()=>{if(!confirm("Supprimer cette image ?"))return;try{await api("/api/admin/media/"+b.dataset.delmedia,{method:"DELETE"});await refresh(false);renderMedia();toast("Image supprimée")}catch(err){toast(err.message)}});
+}
+
 
 function renderCollection(type,title,fields){
   const list=data[type]||[],v=document.getElementById("view");
