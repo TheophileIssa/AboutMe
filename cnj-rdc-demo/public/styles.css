@@ -140,3 +140,16 @@
   .visual-story{min-height:260px}
   .visual-story--wide h3{font-size:20px}
 }
+
+/* Current horizontal CNJ logo */
+.brand{min-width:285px}
+.brand-logo{width:245px;height:72px;border-radius:0;background:transparent;box-shadow:none;display:flex;align-items:center;justify-content:flex-start}
+.brand-logo img{width:100%;height:100%;object-fit:contain;object-position:left center}
+.brand-copy{display:none}
+.footer .brand-logo{width:280px;height:92px;background:#fff;border-radius:12px;padding:6px}
+.footer .brand-copy{display:none}
+@media(max-width:760px){
+  .brand{min-width:0}
+  .brand-logo{width:185px;height:54px}
+  .footer .brand-logo{width:220px;height:76px}
+}
