@@ -53,8 +53,33 @@ function applyOverrides(cms){
    const k=imageKey(img);if(imgs[k]&&img.getAttribute("src")!==imgs[k])img.src=imgs[k];
  }
 }
+const e=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+function applyHiddenSections(cms){
+ const p=cms?.pages?.[pageKey()]||{},hidden=new Set(p.hiddenSections||[]);
+ document.querySelectorAll("main > section").forEach(sec=>{
+   if(sec.id==="cmsCustomBlocks")return;
+   const k=pathOf(sec);
+   if(hidden.has(k)){sec.style.setProperty("display","none","important");sec.dataset.cmsHidden="1"}
+   else if(sec.dataset.cmsHidden){sec.style.removeProperty("display");delete sec.dataset.cmsHidden}
+ });
+}
+function renderCustomBlocks(cms){
+ const p=cms?.pages?.[pageKey()]||{},blocks=Array.isArray(p.blocks)?p.blocks:[];
+ let wrap=document.getElementById("cmsCustomBlocks");
+ if(!wrap){wrap=document.createElement("section");wrap.id="cmsCustomBlocks";wrap.className="cms-custom-blocks";const main=document.querySelector("main");if(main)main.appendChild(wrap)}
+ if(!wrap)return;
+ const blockHtml=b=>{
+   const theme=e(b.theme||"light"),ey=b.eyebrow?'<div class="eyebrow"><span></span>'+e(b.eyebrow)+'</div>':"",title=b.title?'<h2>'+e(b.title)+'</h2>':"",text=b.text?'<p class="cms-block-text">'+e(b.text).replace(/\n/g,"<br>")+'</p>':"",btn=b.buttonLabel?'<a class="btn '+(theme==="blue"?"btn--gold":"btn--navy")+'" href="'+e(b.buttonUrl||"#")+'">'+e(b.buttonLabel)+'</a>':"";
+   if(b.type==="image")return '<section class="section cms-added-section cms-theme-'+theme+'"><div class="container"><div class="cms-image-block">'+(b.image?'<img src="'+e(b.image)+'" alt="'+e(b.title||"")+'">':"")+'<div>'+ey+title+text+btn+'</div></div></div></section>';
+   if(b.type==="gallery"){const imgs=String(b.images||b.image||"").split(",").map(x=>x.trim()).filter(Boolean);return '<section class="section cms-added-section cms-theme-'+theme+'"><div class="container">'+ey+title+text+'<div class="cms-gallery">'+imgs.map(x=>'<img src="'+e(x)+'" alt="">').join("")+'</div>'+btn+'</div></section>'}
+   if(b.type==="cta")return '<section class="section cms-added-section cms-theme-blue"><div class="container"><div class="cms-cta">'+ey+title+text+btn+'</div></div></section>';
+   if(b.type==="textImage")return '<section class="section cms-added-section cms-theme-'+theme+'"><div class="container cms-text-image"><div>'+ey+title+text+btn+'</div>'+(b.image?'<img src="'+e(b.image)+'" alt="'+e(b.title||"")+'">':"")+'</div></section>';
+   return '<section class="section cms-added-section cms-theme-'+theme+'"><div class="container cms-text-only">'+ey+title+text+btn+'</div></section>';
+ };
+ wrap.innerHTML=blocks.map(blockHtml).join("");
+}
 async function load(){if(cache)return cache;const r=await fetch("/api/bootstrap",{cache:"no-store"});cache=await r.json();return cache}
-async function run(){if(applying)return;applying=true;try{const d=await load();applyGlobal(d.cms);applyStructured(d.cms);applyOverrides(d.cms)}catch(e){console.error("CMS runtime",e)}finally{applying=false}}
+async function run(){if(applying)return;applying=true;try{const d=await load();applyGlobal(d.cms);applyStructured(d.cms);applyOverrides(d.cms);applyHiddenSections(d.cms);renderCustomBlocks(d.cms)}catch(e){console.error("CMS runtime",e)}finally{applying=false}}
 function schedule(){clearTimeout(timer);timer=setTimeout(run,120)}
 document.addEventListener("DOMContentLoaded",()=>{run();const o=new MutationObserver(()=>{if(!applying)schedule()});o.observe(document.body,{childList:true,subtree:true})});
 window.CNJ_CMS={pageKey,pathOf,textKey,imageKey,textNodes,images,refresh:async()=>{cache=null;await run()}};
