@@ -29,6 +29,82 @@ function scanEditable(doc){
   return {texts,images,sections};
 }
 function mediaDatalist(){return '<datalist id="cmsMediaUrls">'+(data.cms.media||[]).map(m=>'<option value="'+esc(m.url)+'">'+esc(m.name)+'</option>').join("")+'</datalist>'}
+let cmsPickerSeq=0;
+function pickerMediaOptions(current=""){
+  const seen=new Set(),opts=['<option value="">— Choisir dans la médiathèque —</option>'];
+  if(current){seen.add(current);opts.push('<option value="'+esc(current)+'" selected>Image actuelle</option>')}
+  for(const m of (data.cms.media||[])){if(seen.has(m.url))continue;seen.add(m.url);opts.push('<option value="'+esc(m.url)+'">'+esc(m.name)+'</option>')}
+  return opts.join("");
+}
+function imagePicker({label="Image",value="",name="",cls="",key="",compact=false}={}){
+  const id="cms_img_"+(++cmsPickerSeq);
+  return '<div class="cms-image-picker '+(compact?"cms-image-picker--compact":"")+'" data-picker="'+id+'">'+
+    '<input type="hidden" class="cms-image-value '+esc(cls)+'" '+(name?'name="'+esc(name)+'" ':"")+(key?'data-key="'+esc(key)+'" ':"")+'value="'+esc(value)+'">'+
+    '<div class="cms-dropzone" data-dropzone="'+id+'" tabindex="0">'+
+      '<div class="cms-drop-preview">'+(value?'<img src="'+esc(value)+'" alt="">':'<span>＋</span>')+'</div>'+
+      '<div class="cms-drop-copy"><b>'+esc(label)+'</b><span>Glissez-déposez une image ici ou cliquez pour parcourir</span><small>PNG · JPG · WEBP · 6 MB max</small></div>'+
+      '<input class="cms-file-input" type="file" accept="image/png,image/jpeg,image/webp" hidden>'+
+    '</div>'+
+    '<div class="cms-image-picker-controls">'+
+      '<select class="cms-media-select">'+pickerMediaOptions(value)+'</select>'+
+      '<button type="button" class="btn-sm light cms-clear-image">Retirer</button>'+
+    '</div>'+
+  '</div>';
+}
+function galleryPicker({label="Galerie",value="",name="images"}={}){
+  const id="cms_gallery_"+(++cmsPickerSeq),urls=String(value||"").split(",").map(x=>x.trim()).filter(Boolean);
+  return '<div class="cms-gallery-picker" data-gallery="'+id+'">'+
+    '<input type="hidden" class="cms-gallery-value" name="'+esc(name)+'" value="'+esc(urls.join(","))+'">'+
+    '<label>'+esc(label)+'</label>'+
+    '<div class="cms-gallery-drop" tabindex="0"><div class="cms-gallery-previews">'+(urls.length?urls.map(u=>'<img src="'+esc(u)+'" alt="">').join(""):'<span>Aucune image</span>')+'</div><div><b>Glissez plusieurs images ici</b><small>ou cliquez pour sélectionner plusieurs fichiers</small></div><input class="cms-gallery-input" type="file" accept="image/png,image/jpeg,image/webp" multiple hidden></div>'+
+    '<div class="cms-image-picker-controls"><select class="cms-gallery-media"><option value="">Ajouter depuis la médiathèque</option>'+(data.cms.media||[]).map(m=>'<option value="'+esc(m.url)+'">'+esc(m.name)+'</option>').join("")+'</select><button type="button" class="btn-sm light cms-clear-gallery">Vider la galerie</button></div>'+
+  '</div>';
+}
+async function uploadMediaFile(file){
+  if(!file)throw new Error("Aucun fichier sélectionné");
+  if(!["image/png","image/jpeg","image/webp"].includes(file.type))throw new Error("Format accepté : PNG, JPG ou WEBP");
+  if(file.size>6_000_000)throw new Error("Image trop volumineuse (6 MB max)");
+  const dataUrl=await fileToData(file);
+  const r=await api("/api/admin/media",{method:"POST",body:JSON.stringify({name:file.name,mime:file.type,data:dataUrl})});
+  if(r.item){data.cms.media=data.cms.media||[];data.cms.media.unshift(r.item)}
+  return r.item;
+}
+function setPickerValue(picker,url){
+  const hidden=picker.querySelector(".cms-image-value"),preview=picker.querySelector(".cms-drop-preview"),select=picker.querySelector(".cms-media-select");
+  hidden.value=url||"";
+  preview.innerHTML=url?'<img src="'+esc(url)+'" alt="">':'<span>＋</span>';
+  if(select&&[...select.options].some(o=>o.value===url))select.value=url||"";
+}
+function bindImagePickers(scope=document){
+  scope.querySelectorAll(".cms-image-picker").forEach(picker=>{
+    if(picker.dataset.bound==="1")return;picker.dataset.bound="1";
+    const drop=picker.querySelector(".cms-dropzone"),input=picker.querySelector(".cms-file-input"),select=picker.querySelector(".cms-media-select"),clear=picker.querySelector(".cms-clear-image");
+    const handle=async file=>{try{drop.classList.add("uploading");const item=await uploadMediaFile(file);setPickerValue(picker,item.url);toast("Image uploadée et sélectionnée")}catch(err){toast(err.message)}finally{drop.classList.remove("uploading")}};
+    drop.onclick=e=>{if(e.target.closest("button,select"))return;input.click()};
+    drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();input.click()}};
+    input.onchange=()=>{if(input.files[0])handle(input.files[0])};
+    ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("dragging")}));
+    ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("dragging")}));
+    drop.addEventListener("drop",e=>{const file=e.dataTransfer?.files?.[0];if(file)handle(file)});
+    select.onchange=()=>{if(select.value)setPickerValue(picker,select.value)};
+    clear.onclick=()=>{setPickerValue(picker,"");select.value=""};
+  });
+  scope.querySelectorAll(".cms-gallery-picker").forEach(picker=>{
+    if(picker.dataset.bound==="1")return;picker.dataset.bound="1";
+    const hidden=picker.querySelector(".cms-gallery-value"),drop=picker.querySelector(".cms-gallery-drop"),input=picker.querySelector(".cms-gallery-input"),media=picker.querySelector(".cms-gallery-media"),clear=picker.querySelector(".cms-clear-gallery"),previews=picker.querySelector(".cms-gallery-previews");
+    const urls=()=>String(hidden.value||"").split(",").map(x=>x.trim()).filter(Boolean);
+    const render=()=>{const arr=urls();previews.innerHTML=arr.length?arr.map(u=>'<img src="'+esc(u)+'" alt="">').join(""):'<span>Aucune image</span>'};
+    const addFiles=async files=>{try{drop.classList.add("uploading");const arr=urls();for(const file of files){const item=await uploadMediaFile(file);arr.push(item.url)}hidden.value=arr.join(",");render();toast(files.length+" image(s) ajoutée(s)")}catch(err){toast(err.message)}finally{drop.classList.remove("uploading")}};
+    drop.onclick=()=>input.click();drop.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();input.click()}};
+    input.onchange=()=>{if(input.files.length)addFiles([...input.files])};
+    ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("dragging")}));
+    ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("dragging")}));
+    drop.addEventListener("drop",e=>{const files=[...(e.dataTransfer?.files||[])];if(files.length)addFiles(files)});
+    media.onchange=()=>{if(!media.value)return;const arr=urls();arr.push(media.value);hidden.value=arr.join(",");media.value="";render()};
+    clear.onclick=()=>{hidden.value="";render()};
+  });
+}
+
 
 function renderFullEditor(scan){
   const o=(data.cms.overrides||{})[currentPage]||{texts:{},images:{}},page=data.cms.pages[currentPage]||{},hidden=new Set(page.hiddenSections||[]);
