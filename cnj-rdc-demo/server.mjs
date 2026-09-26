@@ -164,7 +164,7 @@ const server=http.createServer(async(req,res)=>{
       const id=u.pathname.split("/").pop();const item=cms.media.find(x=>x.id===id);if(!item)return send(res,404,{error:"Média introuvable"});cms.media=cms.media.filter(x=>x.id!==id);try{await unlink(join(ROOT,item.url.replace(/^\//,"")));}catch{}await saveCms();return send(res,200,{ok:true});
     }
 
-    for(const [name,key] of [["opportunities","opportunities"],["news","news"],["programs","programs"],["resources","resources"]]){
+    for(const [name,key] of [["opportunities","opportunities"],["news","news"],["programs","programs"],["resources","resources"],["events","events"],["consultations","consultations"]]){
       const r=collectionRoute(u.pathname,name);if(!r)continue;
       if(req.method==="POST"&&r.action==="collection"){const b=sanitize(await body(req));const rec={id:uid(name.slice(0,2)),...b};state[key].unshift(rec);return send(res,201,{ok:true,record:rec});}
       if(req.method==="PUT"&&r.action==="item"){const i=state[key].findIndex(x=>x.id===r.id);if(i<0)return send(res,404,{error:"Élément introuvable"});state[key][i]={...state[key][i],...sanitize(await body(req)),id:r.id};return send(res,200,{ok:true,record:state[key][i]});}
