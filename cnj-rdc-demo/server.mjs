@@ -93,13 +93,12 @@ try{
     overrides:{...cms.overrides,...(saved.overrides||{})}
   };
 }catch{}
-cms.settings.logo="/assets/cnj-logo-current.svg";
 const persistedKeys=["programs","opportunities","news","events","consultations","resources","organizations"];
 if(cms.collections){
   for(const k of persistedKeys) if(Array.isArray(cms.collections[k])) state[k]=cms.collections[k];
 }
 function syncCollections(){cms.collections=Object.fromEntries(persistedKeys.map(k=>[k,state[k]]));}
-async function saveCms(){syncCollections();cms.settings.logo="/assets/cnj-logo-current.svg";await writeFile(CMS_FILE,JSON.stringify(cms,null,2),"utf8");}
+async function saveCms(){syncCollections();await writeFile(CMS_FILE,JSON.stringify(cms,null,2),"utf8");}
 
 const accounts=[
   {id:"u_youth",role:"youth",name:"Jeune Démo",email:"jeune@demo.cnj.cd",password:"Jeune2026!"},
