@@ -187,13 +187,13 @@ function renderCollection(type,title,fields){
     const val=rec[f.name]||"";
     if(f.kind==="textarea")return '<textarea name="'+f.name+'" rows="4">'+esc(val)+'</textarea>';
     if(f.kind==="select")return '<select name="'+f.name+'">'+f.options.map(x=>'<option '+(val===x?"selected":"")+'>'+esc(x)+'</option>').join("")+'</select>';
-    if(f.kind==="media")return '<input name="'+f.name+'" list="cmsMediaUrls" value="'+esc(val)+'" placeholder="Choisir une image de la médiathèque ou coller une URL">';
+    if(f.kind==="media")return imagePicker({label:f.label,value:val,name:f.name});
     return '<input name="'+f.name+'" value="'+esc(val)+'">';
   }
   function editor(rec={}){
     const p=document.getElementById("editorPanel");p.style.display="block";
     p.innerHTML='<div class="panel-head"><div><h2>'+(rec.id?"Modifier":"Ajouter")+' un contenu</h2></div></div><form id="collectionForm"><div class="grid2">'+fields.map(f=>'<div class="field"><label>'+f.label+'</label>'+fieldControl(f,rec)+'</div>').join("")+'</div>'+mediaDatalist()+'<div class="actions" style="margin-top:14px"><button class="btn-sm primary">Enregistrer</button><button type="button" class="btn-sm light" id="cancelEdit">Annuler</button></div></form>';
-    document.getElementById("collectionForm").onsubmit=async e=>{e.preventDefault();const body=Object.fromEntries(new FormData(e.target));try{await api(endpoint+(rec.id?"/"+rec.id:""),{method:rec.id?"PUT":"POST",body:JSON.stringify(body)});toast("Contenu enregistré");await refresh(false);renderCollection(type,title,fields)}catch(err){toast(err.message)}};
+    bindImagePickers(document.getElementById("collectionForm"));document.getElementById("collectionForm").onsubmit=async e=>{e.preventDefault();const body=Object.fromEntries(new FormData(e.target));try{await api(endpoint+(rec.id?"/"+rec.id:""),{method:rec.id?"PUT":"POST",body:JSON.stringify(body)});toast("Contenu enregistré");await refresh(false);renderCollection(type,title,fields)}catch(err){toast(err.message)}};
     document.getElementById("cancelEdit").onclick=()=>p.style.display="none";p.scrollIntoView({behavior:"smooth"});
   }
   document.getElementById("goCollectionMedia").onclick=()=>{currentView="media";shell()};
