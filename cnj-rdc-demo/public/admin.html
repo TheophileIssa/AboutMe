@@ -23,5 +23,14 @@
   .cms-edit-row,.cms-edit-row--image{grid-template-columns:1fr}
   .cms-image-thumb{height:160px}
 }
+</style>
+<style>
+.cms-section-list{display:grid;gap:8px;padding:10px}
+.cms-section-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 12px;background:#fff;border:1px solid #e5ebf3;border-radius:11px}
+.cms-section-row b{display:block;font-size:10px;color:#10213d}.cms-section-row small{display:block;font-size:7px;color:#95a3b5;margin-top:3px;max-width:660px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cms-switch{display:flex;align-items:center;gap:7px;cursor:pointer;flex:0 0 auto}.cms-switch input{display:none}.cms-switch span{width:38px;height:22px;border-radius:999px;background:#cad5e2;position:relative;transition:.2s}.cms-switch span:after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:white;left:3px;top:3px;box-shadow:0 1px 4px rgba(0,0,0,.2);transition:.2s}.cms-switch input:checked+span{background:#0b63ce}.cms-switch input:checked+span:after{left:19px}.cms-switch em{font-style:normal;font-size:8px;color:#64758c;font-weight:900}
+.cms-block-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.cms-block-card{display:grid;grid-template-columns:150px 1fr;border:1px solid #e1e8f0;border-radius:14px;overflow:hidden;background:#fff}.cms-block-card__thumb{min-height:135px;background:#eef4fa;display:grid;place-items:center}.cms-block-card__thumb img{width:100%;height:100%;object-fit:cover}.cms-block-card__thumb span{font:800 10px Montserrat;color:#668}.cms-block-card__body{padding:13px;min-width:0}.cms-block-card__body small{font-size:8px;color:#0b63ce;font-weight:900}.cms-block-card__body h3{font:800 13px Montserrat;margin:6px 0}.cms-block-card__body p{font-size:9px;color:#6d7e94;line-height:1.5}.cms-block-card button:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:900px){.cms-block-list{grid-template-columns:1fr}.cms-block-card{grid-template-columns:110px 1fr}}
+@media(max-width:600px){.cms-section-row{align-items:flex-start;flex-direction:column}.cms-block-card{grid-template-columns:1fr}.cms-block-card__thumb{height:180px}}
 </style></head>
 <body><div id="app"></div><div class="toast" id="toast"></div><script src="/admin.js"></script></body></html>
