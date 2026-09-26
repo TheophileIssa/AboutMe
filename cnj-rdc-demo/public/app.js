@@ -1,6 +1,17 @@
 const state={data:null,user:null,token:localStorage.getItem("cnj_token")||"",showAll:false,selectedProvince:"Kinshasa"};
 const $=s=>document.querySelector(s);const $$=s=>[...document.querySelectorAll(s)];
 const modal=$("#modal"),modalBody=$("#modalBody"),toastEl=$("#toast");
+function applyHomeCms(){
+  const cms=state.data?.cms||{},s=cms.settings||{},p=cms.pages?.home||{};
+  document.querySelectorAll(".brand-logo img,.footBrand img,.footer .brand-logo img").forEach(img=>{if(s.logo)img.src=s.logo});
+  const h=document.querySelector(".hero h1");if(h&&p.heroTitle)h.textContent=p.heroTitle;
+  const lead=document.querySelector(".hero-lead");if(lead&&p.heroText)lead.textContent=p.heroText;
+  const heroImg=document.querySelector(".hero-photo--main img");if(heroImg&&p.heroImage)heroImg.src=p.heroImage;
+  const intro=document.querySelector("#about .section-copy h2");if(intro&&p.introTitle)intro.textContent=p.introTitle;
+  const introText=document.querySelector("#about .section-lead");if(introText&&p.introText)introText.textContent=p.introText;
+  const introImg=document.querySelector("#about .photo-frame--main img");if(introImg&&p.introImage)introImg.src=p.introImage;
+  document.querySelectorAll(".footer-brand>p").forEach(x=>{if(s.tagline)x.textContent=s.tagline});
+}
 function toast(message){toastEl.textContent=message;toastEl.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>toastEl.classList.remove("show"),2800)}
 function api(path,options={}){const headers={"Content-Type":"application/json",...(options.headers||{})};if(state.token)headers.Authorization="Bearer "+state.token;return fetch(path,{...options,headers}).then(async r=>{let d={};try{d=await r.json()}catch{}if(!r.ok)throw new Error(d.error||"Une erreur est survenue");return d})}
 function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -61,5 +72,5 @@ function bindActions(){
  $("#newsletterForm").onsubmit=async e=>{e.preventDefault();const body=Object.fromEntries(new FormData(e.target));try{await api("/api/newsletter",{method:"POST",body:JSON.stringify(body)});e.target.reset();toast("Inscription enregistrée")}catch(err){toast(err.message)}}
 }
 async function restoreSession(){if(!state.token)return;try{const d=await api("/api/me");state.user=d.user}catch{localStorage.removeItem("cnj_token");state.token=""}}
-async function init(){try{state.data=await api("/api/bootstrap");await restoreSession();hydrateSelects();renderMissions();renderValues();renderLeadership();renderOfficialNews();renderOfficialDocs();renderPartners();renderPrograms();renderOppTabs();renderOpportunities();renderProvinceList();renderConsultation();renderNewsFilters();renderNews();renderEvents();renderResources();renderOrganizations();bindActions();bindMobile();reveal()}catch(err){console.error(err);toast("Impossible de charger le portail")}}
+async function init(){try{state.data=await api("/api/bootstrap");applyHomeCms();await restoreSession();hydrateSelects();renderMissions();renderValues();renderLeadership();renderOfficialNews();renderOfficialDocs();renderPartners();renderPrograms();renderOppTabs();renderOpportunities();renderProvinceList();renderConsultation();renderNewsFilters();renderNews();renderEvents();renderResources();renderOrganizations();bindActions();bindMobile();reveal()}catch(err){console.error(err);toast("Impossible de charger le portail")}}
 init();
