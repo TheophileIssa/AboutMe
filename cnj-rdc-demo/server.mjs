@@ -99,7 +99,7 @@ async function body(req,max=12_000_000){return await new Promise((resolve,reject
 function clean(v){return typeof v==="string"?v.replace(/[<>]/g,"").trim().slice(0,10000):v;}
 function sanitize(o){const out={};for(const [k,v] of Object.entries(o||{}))out[k]=typeof v==="string"?clean(v):v;return out;}
 function auth(req,role){const h=req.headers.authorization||"";const token=h.startsWith("Bearer ")?h.slice(7):"";const s=state.sessions.get(token);if(!s)return null;if(role&&s.role!==role)return null;return s;}
-function publicPayload(){return {demo:true,provinces,cms,programs:state.programs,opportunities:state.opportunities,news:state.news,events:state.events,consultations:state.consultations,resources:state.resources,organizations:state.organizations};}
+function publicPayload(){return {demo:true,provinces,cms,programs:state.programs,opportunities:state.opportunities,news:state.news,events:state.events,consultations:state.consultations,resources:state.resources,organizations:state.organizations,missions:state.missions,values:state.values,structure:state.structure,leadership:state.leadership,officialNews:state.officialNews,officialDocuments:state.officialDocuments,partners:state.partners};}
 function extFromMime(m){return {"image/png":".png","image/jpeg":".jpg","image/webp":".webp","image/gif":".gif"}[m]||"";}
 async function serveStatic(res,urlPath){
   let file=urlPath==="/"? "index.html":urlPath.replace(/^\/+/, "");
