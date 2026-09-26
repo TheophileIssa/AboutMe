@@ -1,325 +1,376 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0a2d67" />
-  <meta name="robots" content="noindex,nofollow" />
-  <title>CNJ-RDC — Portail National de la Jeunesse</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#082c63">
+<meta name="robots" content="noindex,nofollow">
+<title>CNJ-RDC — Portail National de la Jeunesse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="demo-bar">
-    <div class="container demo-bar__inner">
-      <span><i class="status-dot"></i> Prototype interactif de proposition — contenus et chiffres à valider avant publication officielle</span>
-      <div class="demo-links"><a href="#resources">Ressources</a><a href="#contact">Contact</a><button class="link-btn" data-open="login">Connexion</button></div>
+
+<div class="demo-bar">
+  <div class="container demo-bar__inner">
+    <span><i class="status-dot"></i> Prototype interactif — proposition de modernisation du portail CNJ-RDC</span>
+    <div class="demo-links"><a href="#documents">Documents</a><a href="#contact">Contact</a><button class="link-btn" data-open="login">Connexion</button></div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <div class="brand-logo"><img src="https://cnj.cd/wp-content/uploads/2025/10/LOGO-CNJ-BLACK-1-scaled.png" alt="CNJ-RDC"></div>
+      <div class="brand-copy"><strong>CNJ-RDC</strong><span>Conseil National de la Jeunesse</span></div>
+    </a>
+    <nav class="nav-menu">
+      <a href="#about">Le CNJ</a>
+      <a href="#missions">Missions</a>
+      <a href="#programs">Nos actions</a>
+      <a href="#network">Réseau</a>
+      <a href="#opportunities">Opportunités</a>
+      <a href="#news">Actualités</a>
+      <a href="#documents">Ressources</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-button" id="searchBtn" aria-label="Rechercher"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg></button>
+      <button class="btn btn--outline-dark" data-open="org">Organisation</button>
+      <button class="btn btn--gold" data-open="login">Espace Jeunes</button>
+      <button class="mobile-toggle" id="mobileToggle"><span></span><span></span><span></span></button>
     </div>
   </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">Le CNJ</a><a href="#missions">Missions</a><a href="#programs">Nos actions</a><a href="#network">Réseau national</a><a href="#opportunities">Opportunités</a><a href="#news">Actualités</a><a href="#documents">Ressources</a><a href="/youth.html">Espace Jeunes</a>
+  </div>
+</header>
 
-  <header class="site-header" id="top">
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="CNJ-RDC">
-        <div class="brand-logo"><img src="https://cnj.cd/wp-content/uploads/2025/10/LOGO-CNJ-BLACK-1-scaled.png" alt="Logo CNJ-RDC" /></div>
-        <div class="brand-copy"><strong>CNJ-RDC</strong><span>Conseil National de la Jeunesse</span></div>
-      </a>
-      <nav class="nav-menu" aria-label="Navigation principale">
-        <a href="#about">Le CNJ</a>
-        <a href="#programs">Nos actions</a>
-        <a href="#network">Réseau national</a>
-        <a href="#opportunities">Opportunités</a>
-        <a href="#participate">Participer</a>
-        <a href="#news">Actualités</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="icon-button" id="searchBtn" aria-label="Rechercher">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-        </button>
-        <button class="btn btn--outline-dark" data-open="org">Organisation</button>
-        <button class="btn btn--gold" data-open="login">Espace Jeunes</button>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+<main>
+<section class="hero" id="home">
+  <div class="hero-bg"></div><div class="hero-orb hero-orb--one"></div><div class="hero-orb hero-orb--two"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <div class="eyebrow eyebrow--light"><span></span> République Démocratique du Congo</div>
+      <h1>La jeunesse congolaise au cœur de la <em>transformation nationale.</em></h1>
+      <p class="hero-lead">Le portail national pour informer, connecter, représenter, mobiliser et accompagner les jeunes, les organisations et les conseils de jeunesse sur l’ensemble du territoire.</p>
+      <div class="hero-ctas"><a class="btn btn--gold btn--lg" href="#opportunities">Voir les opportunités ↗</a><a class="btn btn--glass btn--lg" href="#about">Découvrir le CNJ</a></div>
+      <div class="hero-trust">
+        <div class="avatars"><span>26</span><span>19</span><span>10</span><span>+</span></div>
+        <div><strong>Un portail. Toute une jeunesse.</strong><span>National · Provincial · Local</span></div>
       </div>
     </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#about">Le CNJ</a><a href="#programs">Nos actions</a><a href="#network">Réseau national</a><a href="#opportunities">Opportunités</a><a href="#participate">Participer</a><a href="#news">Actualités</a><a href="/youth.html">Espace Jeunes</a>
+    <div class="hero-showcase reveal reveal--delay">
+      <div class="hero-device">
+        <div class="device-top"><span>CNJ CONNECT</span><div class="device-dots"><i></i><i></i><i></i></div></div>
+        <div class="device-content">
+          <div class="device-welcome"><small>PORTAIL NATIONAL</small><h3>Que recherchez-vous aujourd’hui ?</h3></div>
+          <div class="device-search"><span>⌕</span><span>Opportunité, programme, province, document...</span></div>
+          <div class="device-kpis"><div><b>26</b><span>Provinces</span></div><div><b>11K+</b><span>Organisations</span></div><div><b>10</b><span>Groupes thématiques</span></div></div>
+          <div class="device-card device-card--blue"><div><span class="device-icon">✦</span><small>ACCÈS RAPIDE</small><h4>Opportunités, consultations et initiatives jeunesse</h4></div><span class="device-arrow">→</span></div>
+          <div class="device-row"><div class="device-mini"><span>◉</span><div><b>Participer</b><small>Consultations</small></div></div><div class="device-mini"><span>⌖</span><div><b>Ma province</b><small>Réseau CNJ</small></div></div></div>
+        </div>
+      </div>
+      <div class="floating-card floating-card--top"><span class="floating-icon">🎓</span><div><small>FORMATION</small><b>Éducation & emploi</b></div></div>
+      <div class="floating-card floating-card--bottom"><span class="floating-icon">✓</span><div><small>RÉSEAU NATIONAL</small><b>26 provinces connectées</b></div></div>
     </div>
-  </header>
+  </div>
+  <div class="hero-bottom">
+    <div class="container hero-bottom__grid">
+      <div><span>01</span><b>Opportunités</b><small>Emploi · Stage · Bourses</small></div>
+      <div><span>02</span><b>Consultations</b><small>Votre voix compte</small></div>
+      <div><span>03</span><b>Réseau national</b><small>26 provinces</small></div>
+      <div><span>04</span><b>Ressources</b><small>Documents · Guides</small></div>
+    </div>
+  </div>
+</section>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-bg"></div>
-      <div class="hero-orb hero-orb--one"></div><div class="hero-orb hero-orb--two"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="eyebrow eyebrow--light"><span></span> Portail National de la Jeunesse Congolaise</div>
-          <h1>La jeunesse congolaise <em>au cœur de la transformation nationale.</em></h1>
-          <p class="hero-lead">Un espace unique pour s'informer, saisir des opportunités, rejoindre un réseau, participer aux consultations et valoriser les initiatives des jeunes de la RDC.</p>
-          <div class="hero-ctas">
-            <a class="btn btn--gold btn--lg" href="#opportunities">Explorer les opportunités <span>↗</span></a>
-            <a class="btn btn--glass btn--lg" href="#programs">Découvrir nos actions</a>
-          </div>
-          <div class="hero-trust">
-            <div class="avatars"><span>J</span><span>C</span><span>R</span><span>+</span></div>
-            <div><strong>Informer. Connecter. Représenter.</strong><span>Mobiliser. Agir.</span></div>
-          </div>
-        </div>
+<section class="quick-access">
+  <div class="container">
+    <div class="quick-title"><span>ACCÈS DIRECT</span><p>Les services les plus utiles en un clic.</p></div>
+    <div class="quick-access-grid">
+      <a href="#opportunities" class="quick-access-card"><i>↗</i><div><b>Trouver une opportunité</b><span>Emploi, stage, bourse, formation</span></div></a>
+      <button class="quick-access-card" data-open="org"><i>◎</i><div><b>Enregistrer une organisation</b><span>Rejoindre l’annuaire national</span></div></button>
+      <a href="#network" class="quick-access-card"><i>⌖</i><div><b>Trouver mon conseil</b><span>Accéder à ma province</span></div></a>
+      <button class="quick-access-card" data-open="consult"><i>◉</i><div><b>Donner mon avis</b><span>Participer aux consultations</span></div></button>
+      <a href="#documents" class="quick-access-card"><i>↓</i><div><b>Télécharger un document</b><span>Politiques, guides et rapports</span></div></a>
+      <a href="/youth.html" class="quick-access-card"><i>◫</i><div><b>Mon espace jeune</b><span>Favoris et candidatures</span></div></a>
+    </div>
+  </div>
+</section>
 
-        <div class="hero-showcase reveal reveal--delay">
-          <div class="hero-device">
-            <div class="device-top"><span>CNJ CONNECT</span><div class="device-dots"><i></i><i></i><i></i></div></div>
-            <div class="device-content">
-              <div class="device-welcome"><small>Bienvenue sur votre portail</small><h3>Que recherchez-vous aujourd'hui ?</h3></div>
-              <div class="device-search"><span>⌕</span><span>Rechercher une opportunité, un programme...</span></div>
-              <div class="device-kpis">
-                <div><b>26</b><span>Provinces</span></div><div><b>11K+</b><span>Organisations*</span></div><div><b>100+</b><span>Opportunités*</span></div>
-              </div>
-              <div class="device-card device-card--blue"><div><span class="device-icon">✦</span><small>À LA UNE</small><h4>Appels, formations et opportunités pour les jeunes</h4></div><span class="device-arrow">→</span></div>
-              <div class="device-row"><div class="device-mini"><span>◉</span><div><b>Consultations</b><small>Donnez votre avis</small></div></div><div class="device-mini"><span>⌖</span><div><b>Votre province</b><small>Explorer le réseau</small></div></div></div>
-            </div>
-          </div>
-          <div class="floating-card floating-card--top"><span class="floating-icon">🎓</span><div><small>NOUVELLE OPPORTUNITÉ</small><b>Formation numérique</b></div></div>
-          <div class="floating-card floating-card--bottom"><span class="floating-icon">✓</span><div><small>RÉSEAU NATIONAL</small><b>26 provinces connectées</b></div></div>
-        </div>
+<section class="section section--white" id="about">
+  <div class="container split intro">
+    <div class="intro-visual reveal">
+      <div class="photo-frame photo-frame--main"><img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1400&q=85" alt="Jeunesse africaine"></div>
+      <div class="photo-frame photo-frame--small"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="Jeunes engagés"></div>
+      <div class="visual-badge"><strong>Depuis 1994</strong><span>Une institution nationale au service de la jeunesse</span></div>
+    </div>
+    <div class="section-copy reveal">
+      <div class="eyebrow"><span></span> À propos du CNJ</div>
+      <h2>L’interface nationale entre les jeunes, leurs organisations et les pouvoirs publics.</h2>
+      <p class="section-lead">Le Conseil National de la Jeunesse est l’institution faîtière de représentation, de coordination, d’accompagnement et d’encadrement de la jeunesse congolaise, placée sous la tutelle du ministère en charge de la Jeunesse.</p>
+      <div class="about-facts">
+        <div><strong>1994</strong><span>Création du CNJ</span></div><div><strong>19</strong><span>Membres du Comité Exécutif National</span></div><div><strong>11</strong><span>Membres du Comité de Contrôle</span></div><div><strong>10</strong><span>Groupes thématiques</span></div>
       </div>
-      <div class="hero-bottom">
-        <div class="container hero-bottom__grid">
-          <div><span>01</span><b>Opportunités</b><small>Emploi · Stage · Bourses</small></div>
-          <div><span>02</span><b>Réseau national</b><small>26 provinces</small></div>
-          <div><span>03</span><b>Participation</b><small>Consultations · Initiatives</small></div>
-          <div><span>04</span><b>Ressources</b><small>Guides · Rapports</small></div>
-        </div>
-      </div>
-    </section>
+      <button class="text-link" data-open="about">Découvrir l’institution →</button>
+    </div>
+  </div>
+</section>
 
-    <section class="section section--white" id="about">
-      <div class="container split intro">
-        <div class="intro-visual reveal">
-          <div class="photo-frame photo-frame--main"><img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1400&q=85" alt="Jeunes africains engagés" /></div>
-          <div class="photo-frame photo-frame--small"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80" alt="Jeunes en groupe" /></div>
-          <div class="visual-badge"><strong>Une vision nationale</strong><span>Un réseau au service de la jeunesse</span></div>
-        </div>
-        <div class="section-copy reveal">
-          <div class="eyebrow"><span></span> Notre rôle</div>
-          <h2>Représenter, connecter et accompagner la jeunesse congolaise.</h2>
-          <p class="section-lead">Le nouveau portail place les jeunes au centre de l'expérience : une information plus accessible, des opportunités plus visibles et des outils de participation plus simples.</p>
-          <div class="feature-list">
-            <div><span>01</span><div><b>Représentation</b><p>Faire remonter les priorités, les besoins et les propositions des jeunes.</p></div></div>
-            <div><span>02</span><div><b>Coordination</b><p>Créer un lien clair entre niveau national, provinces et organisations de jeunesse.</p></div></div>
-            <div><span>03</span><div><b>Accompagnement</b><p>Orienter vers les programmes, ressources, partenaires et opportunités utiles.</p></div></div>
-          </div>
-          <button class="text-link" data-open="about">En savoir plus sur le CNJ <span>→</span></button>
-        </div>
-      </div>
-    </section>
-
-    
-<section class="section section--white" id="missions">
+<section class="section mission-section" id="missions">
   <div class="container">
     <div class="section-heading reveal">
-      <div><div class="eyebrow"><span></span> Missions</div><h2>Les missions essentielles du Conseil National de la Jeunesse.</h2></div>
-      <p>Une présentation plus complète du rôle institutionnel, pensée pour être comprise rapidement par les jeunes, les organisations et les partenaires.</p>
+      <div><div class="eyebrow"><span></span> Missions</div><h2>Cinq missions structurent l’action du CNJ.</h2></div>
+      <p>Représentation, coordination, promotion des initiatives, renforcement des capacités et participation citoyenne.</p>
     </div>
-    <div class="mission-grid" id="missionGrid"></div>
+    <div class="mission-grid">
+      <article class="mission-card"><span>01</span><h3>Représenter</h3><p>Représenter la jeunesse congolaise auprès des pouvoirs publics, institutions et partenaires techniques et financiers.</p></article>
+      <article class="mission-card"><span>02</span><h3>Coordonner</h3><p>Coordonner les structures et mouvements de jeunesse à l’échelle nationale.</p></article>
+      <article class="mission-card"><span>03</span><h3>Promouvoir</h3><p>Promouvoir les initiatives économiques, sociales et culturelles portées par les jeunes.</p></article>
+      <article class="mission-card"><span>04</span><h3>Renforcer</h3><p>Renforcer les capacités des jeunes à travers la formation et l’encadrement.</p></article>
+      <article class="mission-card"><span>05</span><h3>Faire participer</h3><p>Favoriser l’autonomisation et la participation citoyenne des jeunes à la gouvernance locale et nationale.</p></article>
+    </div>
   </div>
 </section>
 
-<section class="section section--paper" id="values">
-  <div class="container values-layout">
-    <div class="values-copy reveal">
-      <div class="eyebrow"><span></span> Valeurs</div>
-      <h2>Une institution fondée sur l’engagement, l’intégrité et l’inclusion.</h2>
-      <p class="section-lead">Les valeurs deviennent visibles dans le portail afin d’expliquer l’identité du CNJ et la manière dont il souhaite travailler avec la jeunesse.</p>
-      <div class="values-grid" id="valuesGrid"></div>
+<section class="vision-band">
+  <div class="container vision-band__grid">
+    <div><div class="eyebrow eyebrow--light"><span></span> Vision stratégique</div><h2>« Capter & mobiliser le potentiel jeune maintenant, sur la trajectoire du progrès de la RDC. »</h2></div>
+    <div class="vision-pillars"><span>Unité</span><span>Responsabilité</span><span>Innovation</span><span>Intégrité</span></div>
+  </div>
+</section>
+
+<section class="section section--paper" id="structure">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><div class="eyebrow"><span></span> Organisation nationale</div><h2>Un réseau territorial de grande ampleur.</h2></div>
+      <p>Le CNJ dispose d’un maillage national allant du niveau provincial jusqu’aux structures locales de jeunesse.</p>
     </div>
-    <div class="impact-panel reveal reveal--delay">
-      <small>STRUCTURE NATIONALE</small>
-      <h3>Un réseau territorial à plusieurs niveaux.</h3>
-      <div class="impact-list" id="structureGrid"></div>
+    <div class="structure-grid">
+      <div><b>26</b><span>Conseils provinciaux</span></div><div><b>137</b><span>Conseils urbains</span></div><div><b>174</b><span>Conseils communaux</span></div><div><b>145</b><span>Conseils territoriaux</span></div><div><b>471</b><span>Conseils des secteurs</span></div><div><b>5 908</b><span>Conseils des groupements</span></div><div><b>11 000+</b><span>Organisations membres</span></div>
+    </div>
+    <div class="values-grid">
+      <article><i>01</i><h3>Unité & solidarité</h3><p>Fédérer les jeunes autour d’une vision collective.</p></article>
+      <article><i>02</i><h3>Responsabilité citoyenne</h3><p>Renforcer la participation active à la vie de la nation.</p></article>
+      <article><i>03</i><h3>Innovation & leadership</h3><p>Stimuler les idées, la créativité et la prise d’initiative.</p></article>
+      <article><i>04</i><h3>Intégrité & transparence</h3><p>Promouvoir la confiance et la redevabilité dans les actions de jeunesse.</p></article>
     </div>
   </div>
 </section>
+
 <section class="section section--blue" id="programs">
-      <div class="container">
-        <div class="section-heading section-heading--light reveal">
-          <div><div class="eyebrow eyebrow--light"><span></span> Nos actions</div><h2>Des programmes conçus autour des priorités de la jeunesse.</h2></div>
-          <p>Une lecture claire par thématique, enrichie d'informations, d'activités et d'opportunités liées.</p>
-        </div>
-        <div class="program-grid" id="programGrid"></div>
-        <div class="program-strip reveal">
-          <div><small>PROGRAMMES & INITIATIVES</small><h3>Découvrir l'ensemble des axes d'intervention</h3></div>
-          <button class="btn btn--white">Voir tous les programmes <span>→</span></button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--paper" id="opportunities">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div><div class="eyebrow"><span></span> Opportunités</div><h2>Votre prochaine opportunité commence ici.</h2></div>
-          <p>Un catalogue centralisé avec recherche, filtres, favoris et candidatures.</p>
-        </div>
-        <div class="opportunity-toolbar reveal">
-          <label class="search-box"><span>⌕</span><input id="oppSearch" placeholder="Rechercher une opportunité..." /></label>
-          <select id="oppProvince"><option value="">Toutes les provinces</option></select>
-          <select id="oppType"><option value="">Toutes les catégories</option></select>
-          <button class="filter-icon" id="clearFilters" title="Réinitialiser">↺</button>
-        </div>
-        <div class="opportunity-tabs" id="oppTabs"></div>
-        <div class="opportunity-grid" id="opportunityGrid"></div>
-        <div class="center-action"><button class="btn btn--navy" id="showAllOpps">Voir toutes les opportunités <span>→</span></button></div>
-      </div>
-    </section>
-
-    <section class="section network-section" id="network">
-      <div class="container network-grid">
-        <div class="network-copy reveal">
-          <div class="eyebrow eyebrow--light"><span></span> Réseau national</div>
-          <h2>26 provinces. Une seule jeunesse connectée.</h2>
-          <p>Explorez le réseau territorial, trouvez votre province et accédez à une fiche dédiée avec activités, organisations et opportunités locales.</p>
-          <label class="province-search"><span>⌕</span><input id="provinceSearch" placeholder="Rechercher une province..." /></label>
-          <div class="network-list" id="provinceList"></div>
-        </div>
-        <div class="map-panel reveal reveal--delay">
-          <div class="map-top"><span>CARTE INTERACTIVE</span><button class="map-chip">26 provinces</button></div>
-          <div class="dr-map">
-            <svg viewBox="0 0 700 520" role="img" aria-label="Carte stylisée de la RDC">
-              <defs><linearGradient id="mapG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e7ae1"/><stop offset="1" stop-color="#0750a8"/></linearGradient></defs>
-              <path d="M157 185 224 80l91 25 66-49 92 59 25 87 98 30-29 85-71 34-52 87-114-23-74 51-86-49-40-88-68-52 34-74z" fill="url(#mapG)"/>
-              <g fill="#f4c52b" class="map-points"><circle cx="150" cy="304" r="10"/><circle cx="248" cy="149" r="8"/><circle cx="355" cy="183" r="8"/><circle cx="476" cy="296" r="10"/><circle cx="395" cy="372" r="9"/><circle cx="274" cy="339" r="8"/></g>
-            </svg>
-            <div class="map-callout"><span>⌖</span><div><small>PROVINCE SÉLECTIONNÉE</small><b id="selectedProvince">Kinshasa</b><button id="openProvince">Voir la fiche →</button></div></div>
-          </div>
-          <div class="map-stats"><div><b>26</b><span>Conseils provinciaux</span></div><div><b>137*</b><span>Conseils urbains</span></div><div><b>174*</b><span>Conseils communaux</span></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--white" id="participate">
-      <div class="container participation-grid">
-        <div class="participation-visual reveal">
-          <img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57?auto=format&fit=crop&w=1400&q=85" alt="Participation de jeunes" />
-          <div class="participation-overlay"><small>VOTRE VOIX COMPTE</small><h3>Participez aux consultations nationales et provinciales.</h3></div>
-        </div>
-        <div class="participation-content reveal">
-          <div class="eyebrow"><span></span> Participer</div>
-          <h2>Votre voix peut orienter l'action.</h2>
-          <p>Répondez aux consultations, proposez une initiative ou enregistrez votre organisation.</p>
-          <div class="consultation-card" id="featuredConsultation"></div>
-          <div class="participation-actions">
-            <button class="btn btn--navy" data-open="consult">Participer à une consultation</button>
-            <button class="btn btn--outline-dark" data-open="initiative">Proposer une initiative</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    
-<section class="section section--white" id="leadership">
   <div class="container">
-    <div class="section-heading reveal">
-      <div><div class="eyebrow"><span></span> Gouvernance</div><h2>Une gouvernance visible et accessible.</h2></div>
-      <p>Le portail prévoit un espace clair pour présenter les responsables, leurs fonctions et la structure institutionnelle.</p>
+    <div class="section-heading section-heading--light reveal">
+      <div><div class="eyebrow eyebrow--light"><span></span> Nos actions</div><h2>Des programmes autour des grands enjeux de la jeunesse.</h2></div>
+      <p>Chaque axe peut regrouper programmes, projets, résultats, partenaires, documents et opportunités associées.</p>
     </div>
-    <div class="leadership-grid" id="leadershipGrid"></div>
+    <div class="program-grid" id="programGrid"></div>
+    <div class="topic-grid">
+      <article><span>01</span><b>Éducation, formation & emploi</b><p>Compétences, orientation, employabilité et insertion.</p></article>
+      <article><span>02</span><b>Gouvernance, paix & sécurité</b><p>Participation citoyenne, cohésion sociale et leadership.</p></article>
+      <article><span>03</span><b>Entrepreneuriat & autonomie</b><p>Création d’activités, incubation et accès au financement.</p></article>
+      <article><span>04</span><b>Innovation & numérique</b><p>Technologie, créativité et transformation digitale.</p></article>
+      <article><span>05</span><b>Genre & inclusion</b><p>Participation équitable et inclusion de toutes les catégories de jeunes.</p></article>
+      <article><span>06</span><b>Culture, sport & créativité</b><p>Expression, talents et industries culturelles.</p></article>
+      <article><span>07</span><b>Agriculture & environnement</b><p>Entrepreneuriat vert, climat et agro-industrie.</p></article>
+      <article><span>08</span><b>Santé & bien-être</b><p>Sensibilisation, prévention et accès à l’information.</p></article>
+    </div>
   </div>
 </section>
+
+<section class="portal-services">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><div class="eyebrow"><span></span> Le portail en pratique</div><h2>Un véritable guichet numérique pour la jeunesse.</h2></div>
+      <p>Le site ne se limite pas à présenter le CNJ : il doit permettre aux jeunes d’agir.</p>
+    </div>
+    <div class="service-grid">
+      <article><i>↗</i><h3>Opportunités</h3><p>Emploi, stages, bourses, appels à projets, volontariat et formations.</p></article>
+      <article><i>◉</i><h3>Consultations</h3><p>Sondages et consultations nationales ou provinciales.</p></article>
+      <article><i>◎</i><h3>Annuaire jeunesse</h3><p>Répertoire des organisations et structures membres.</p></article>
+      <article><i>⌖</i><h3>Portails provinciaux</h3><p>Une fiche dédiée à chacune des 26 provinces.</p></article>
+      <article><i>↓</i><h3>Bibliothèque</h3><p>Guides, politiques, plans, rapports et textes de référence.</p></article>
+      <article><i>◫</i><h3>Espace Jeunes</h3><p>Favoris, candidatures, alertes et parcours personnalisé.</p></article>
+      <article><i>✦</i><h3>Proposer une initiative</h3><p>Soumettre une idée, un projet ou une activité jeunesse.</p></article>
+      <article><i>✓</i><h3>Back-office CNJ</h3><p>Gestion des opportunités, demandes, contenus et interactions.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper" id="opportunities">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><div class="eyebrow"><span></span> Opportunités</div><h2>Votre prochaine opportunité commence ici.</h2></div>
+      <p>Recherche, filtres, détail, favoris et candidature dans une expérience unique.</p>
+    </div>
+    <div class="opportunity-toolbar reveal">
+      <label class="search-box"><span>⌕</span><input id="oppSearch" placeholder="Rechercher une opportunité..."></label>
+      <select id="oppProvince"><option>Toutes les provinces</option></select>
+      <select id="oppType"><option>Toutes les catégories</option></select>
+      <button class="filter-icon" id="clearFilters">↺</button>
+    </div>
+    <div class="opportunity-tabs" id="oppTabs"></div>
+    <div class="opportunity-grid" id="opportunityGrid">
+      <article class="opportunity-card"><div class="card-head"><span class="tag">Formation</span><small>Démo</small></div><h3>Compétences numériques pour l’emploi</h3><p>Les opportunités interactives se chargent automatiquement.</p></article>
+      <article class="opportunity-card"><div class="card-head"><span class="tag">Stage</span><small>Démo</small></div><h3>Stage en communication digitale</h3><p>Filtrez par province, catégorie et mot-clé.</p></article>
+      <article class="opportunity-card"><div class="card-head"><span class="tag">Financement</span><small>Démo</small></div><h3>Appel à projets jeunesse</h3><p>Sauvegardez ou soumettez une candidature depuis le portail.</p></article>
+    </div>
+    <div class="center-action"><button class="btn btn--navy" id="showAllOpps">Voir toutes les opportunités →</button></div>
+  </div>
+</section>
+
+<section class="section network-section" id="network">
+  <div class="container network-grid">
+    <div class="network-copy reveal">
+      <div class="eyebrow eyebrow--light"><span></span> Réseau national</div>
+      <h2>26 provinces. Une seule jeunesse connectée.</h2>
+      <p>Chaque province peut disposer d’un espace dédié : contacts, conseil provincial, organisations membres, activités, agenda, actualités et opportunités locales.</p>
+      <label class="province-search"><span>⌕</span><input id="provinceSearch" placeholder="Rechercher une province..."></label>
+      <div class="network-list" id="provinceList"></div>
+    </div>
+    <div class="map-panel reveal reveal--delay">
+      <div class="map-top"><span>CARTE DU RÉSEAU CNJ</span><button class="map-chip">26 provinces</button></div>
+      <div class="dr-map">
+        <svg viewBox="0 0 700 520"><defs><linearGradient id="mapG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e7ae1"/><stop offset="1" stop-color="#0750a8"/></linearGradient></defs><path d="M157 185 224 80l91 25 66-49 92 59 25 87 98 30-29 85-71 34-52 87-114-23-74 51-86-49-40-88-68-52 34-74z" fill="url(#mapG)"/><g fill="#f4c52b"><circle cx="150" cy="304" r="10"/><circle cx="248" cy="149" r="8"/><circle cx="355" cy="183" r="8"/><circle cx="476" cy="296" r="10"/><circle cx="395" cy="372" r="9"/><circle cx="274" cy="339" r="8"/></g></svg>
+        <div class="map-callout"><span>⌖</span><div><small>PROVINCE SÉLECTIONNÉE</small><b id="selectedProvince">Kinshasa</b><button id="openProvince">Ouvrir la fiche →</button></div></div>
+      </div>
+      <div class="map-stats"><div><b>26</b><span>Conseils provinciaux</span></div><div><b>137</b><span>Conseils urbains</span></div><div><b>174</b><span>Conseils communaux</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white" id="participate">
+  <div class="container participation-grid">
+    <div class="participation-visual reveal"><img src="https://images.unsplash.com/photo-1520857014576-2c4f4c972b57?auto=format&fit=crop&w=1400&q=85" alt="Participation citoyenne"><div class="participation-overlay"><small>PARTICIPATION</small><h3>Faire de chaque jeune un acteur de la décision et de l’action.</h3></div></div>
+    <div class="participation-content reveal">
+      <div class="eyebrow"><span></span> Participer</div><h2>Votre voix peut orienter l’action.</h2><p>Contribuez aux consultations, proposez une initiative ou enregistrez votre organisation.</p>
+      <div class="consultation-card" id="featuredConsultation"><small>CONSULTATION</small><h3>Emploi des jeunes & compétences numériques</h3><p>Participez directement depuis le portail.</p></div>
+      <div class="participation-actions"><button class="btn btn--navy" data-open="consult">Participer à une consultation</button><button class="btn btn--outline-dark" data-open="initiative">Proposer une initiative</button><button class="btn btn--outline-dark" data-open="org">Enregistrer une organisation</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="section leadership-section" id="governance">
+  <div class="container">
+    <div class="section-heading reveal">
+      <div><div class="eyebrow"><span></span> Gouvernance</div><h2>Quelques membres du Bureau National.</h2></div>
+      <p>La gouvernance complète du portail pourra présenter le Comité Exécutif National, le Comité de Contrôle et les groupes thématiques.</p>
+    </div>
+    <div class="leadership-grid">
+      <article><div class="leader-avatar">CM</div><div><small>PRÉSIDENCE</small><h3>Ir Claude MBUYI</h3><p>Président du Conseil National de la Jeunesse</p></div></article>
+      <article><div class="leader-avatar">CM</div><div><small>VICE-PRÉSIDENCE</small><h3>Christenvie MELLY</h3><p>Vice-Présidente chargée du genre</p></div></article>
+      <article><div class="leader-avatar">MD</div><div><small>COMMUNICATION</small><h3>MUKENDI MBUYI Daniel</h3><p>Porte-parole et Conseiller chargé de Communication et Médias</p></div></article>
+    </div>
+  </div>
+</section>
+
 <section class="section section--paper" id="news">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div><div class="eyebrow"><span></span> Actualités</div><h2>Ce qui fait bouger la jeunesse.</h2></div>
-          <div class="news-filter" id="newsFilter"></div>
-        </div>
-        <div class="news-layout">
-          <article class="news-feature reveal" id="newsFeature"></article>
-          <div class="news-stack reveal reveal--delay" id="newsStack"></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--white" id="agenda">
-      <div class="container agenda-grid">
-        <div>
-          <div class="eyebrow"><span></span> Agenda</div>
-          <h2>À ne pas manquer.</h2>
-          <p class="section-lead">Événements, rencontres, ateliers et activités du réseau.</p>
-        </div>
-        <div class="event-list" id="eventList"></div>
-      </div>
-    </section>
-
-    <section class="section resources-section" id="resources">
-      <div class="container">
-        <div class="section-heading section-heading--light reveal">
-          <div><div class="eyebrow eyebrow--light"><span></span> Ressources</div><h2>Une bibliothèque utile pour agir.</h2></div>
-          <p>Guides, rapports, kits et documents de référence.</p>
-        </div>
-        <div class="resource-grid" id="resourceGrid"></div>
-      </div>
-    </section>
-
-    <section class="section section--white" id="organizations">
-      <div class="container">
-        <div class="section-heading reveal">
-          <div><div class="eyebrow"><span></span> Organisations de jeunesse</div><h2>Un réseau visible, structuré et accessible.</h2></div>
-          <button class="btn btn--navy" data-open="org">Enregistrer mon organisation</button>
-        </div>
-        <div class="org-grid" id="orgGrid"></div>
-      </div>
-    </section>
-
-    
-<section class="section section--white" id="official-news">
   <div class="container">
     <div class="section-heading reveal">
-      <div><div class="eyebrow"><span></span> Publications officielles</div><h2>Actualités et communications institutionnelles.</h2></div>
-      <p>Un espace éditorial plus dense permet de valoriser la vie de l’institution, les rencontres, les programmes et les activités du réseau.</p>
+      <div><div class="eyebrow"><span></span> Actualités</div><h2>L’actualité du CNJ et de la jeunesse.</h2></div>
+      <div class="news-filter" id="newsFilter"></div>
     </div>
-    <div class="official-news-grid" id="officialNewsGrid"></div>
+    <div class="news-layout"><article class="news-feature reveal" id="newsFeature"></article><div class="news-stack reveal reveal--delay" id="newsStack"></div></div>
+    <div class="official-news-list">
+      <article><time>18 AVR. 2026</time><span>Actualités</span><h3>RDC – Jeunesse et MONUSCO : une rencontre stratégique pour renforcer la paix et la collaboration</h3></article>
+      <article><time>23 DÉC. 2025</time><span>Actualités</span><h3>Kolwezi : lancement officiel du Symposium de la Jeunesse du Lualaba avec la Fondation MAP</h3></article>
+      <article><time>22 DÉC. 2025</time><span>Actualités</span><h3>Bureau CNJ-RDC : séance de travail pour la planification du plan d’action 2026 en faveur de la jeunesse</h3></article>
+      <article><time>06 NOV. 2025</time><span>Actualités</span><h3>Je suis jeune, je m’engage pour la reconnaissance du Génocost</h3></article>
+    </div>
   </div>
 </section>
 
-<section class="section section--paper" id="official-documents">
-  <div class="container docs-layout">
-    <div class="docs-copy reveal">
-      <div class="eyebrow"><span></span> Textes & références</div>
-      <h2>Les documents utiles réunis dans un même espace.</h2>
-      <p class="section-lead">Le futur CMS permettra de publier les textes de référence, rapports, plans stratégiques, guides et publications du CNJ.</p>
-    </div>
-    <div class="official-doc-list" id="officialDocList"></div>
+<section class="section section--white" id="agenda">
+  <div class="container agenda-grid">
+    <div><div class="eyebrow"><span></span> Agenda</div><h2>À ne pas manquer.</h2><p class="section-lead">Événements, ateliers, rencontres et activités du réseau.</p></div>
+    <div class="event-list" id="eventList"></div>
   </div>
 </section>
 
-<section class="section section--white" id="partners">
+<section class="section documents-section" id="documents">
+  <div class="container">
+    <div class="section-heading section-heading--light reveal">
+      <div><div class="eyebrow eyebrow--light"><span></span> Documents & publications</div><h2>Les références essentielles de la jeunesse.</h2></div>
+      <p>Les documents peuvent être organisés par thème, année, type et niveau territorial.</p>
+    </div>
+    <div class="documents-grid">
+      <a href="https://cnj.cd/" target="_blank"><i>PDF</i><small>DOCUMENT DE RÉFÉRENCE</small><h3>Charte Africaine de la Jeunesse</h3><span>Consulter →</span></a>
+      <a href="https://cnj.cd/wp-content/uploads/2025/12/Resolution_2250_2015_UN-1.pdf" target="_blank"><i>PDF</i><small>JEUNESSE, PAIX & SÉCURITÉ</small><h3>Résolution 2250</h3><span>Télécharger →</span></a>
+      <a href="https://cnj.cd/" target="_blank"><i>PDF</i><small>CADRE NATIONAL</small><h3>Politique Nationale de la Jeunesse</h3><span>Consulter →</span></a>
+      <a href="https://cnj.cd/" target="_blank"><i>PDF</i><small>STRATÉGIE</small><h3>Plan stratégique du CNJ</h3><span>Consulter →</span></a>
+    </div>
+    <div class="resource-grid" id="resourceGrid"></div>
+  </div>
+</section>
+
+<section class="partners-section">
+  <div class="container">
+    <div class="partners-head"><div class="eyebrow"><span></span> Partenaires</div><p>Partenaires présentés sur le portail officiel du CNJ-RDC.</p></div>
+    <div class="partner-grid"><span>La Présidence</span><span>PNUD</span><span>CNSSAP</span><span>UNFPA</span><span>UNESCO</span><span>CIDE</span><span>Glorhis MS SARL</span></div>
+  </div>
+</section>
+
+<section class="section section--white" id="organizations">
   <div class="container">
     <div class="section-heading reveal">
-      <div><div class="eyebrow"><span></span> Partenaires</div><h2>Un écosystème mobilisé autour de la jeunesse.</h2></div>
-      <p>Le portail doit aussi rendre visibles les collaborations institutionnelles et techniques autour des programmes jeunesse.</p>
+      <div><div class="eyebrow"><span></span> Organisations de jeunesse</div><h2>Un annuaire national visible et structuré.</h2></div>
+      <button class="btn btn--navy" data-open="org">Enregistrer mon organisation</button>
     </div>
-    <div class="partners-grid" id="partnersGrid"></div>
+    <div class="org-grid" id="orgGrid"></div>
   </div>
 </section>
-<section class="section cta-section" id="contact">
-      <div class="container cta-panel reveal">
-        <div class="cta-copy"><small>RESTEZ CONNECTÉ</small><h2>Les opportunités et actualités de la jeunesse directement dans votre boîte mail.</h2><p>Inscrivez-vous pour recevoir les nouveautés du portail.</p></div>
-        <form class="newsletter" id="newsletterForm"><input name="email" type="email" placeholder="Votre adresse e-mail" required /><button class="btn btn--gold">S'inscrire <span>→</span></button></form>
-      </div>
-    </section>
-  </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand"><div class="brand brand--footer"><div class="brand-logo"><img src="https://cnj.cd/wp-content/uploads/2025/10/LOGO-CNJ-BLACK-1-scaled.png" alt="Logo CNJ-RDC" /></div><div class="brand-copy"><strong>CNJ-RDC</strong><span>Conseil National de la Jeunesse</span></div></div><p>Un portail national pour informer, connecter, représenter et mobiliser la jeunesse congolaise.</p></div>
-      <div><h4>Institution</h4><a href="#about">À propos</a><a href="#programs">Nos actions</a><a href="#network">Réseau national</a><a href="#resources">Ressources</a></div>
-      <div><h4>Jeunesse</h4><a href="#opportunities">Opportunités</a><a href="#participate">Consultations</a><a href="#organizations">Organisations</a><a href="/youth.html">Espace Jeunes</a></div>
-      <div><h4>Contact</h4><p>Kinshasa, République Démocratique du Congo</p><button class="text-link text-link--light" data-open="contact">Écrire au CNJ →</button></div>
+<section class="section faq-section">
+  <div class="container faq-grid">
+    <div><div class="eyebrow"><span></span> Questions fréquentes</div><h2>Tout comprendre rapidement.</h2><p>Une FAQ dédiée permet de réduire les demandes répétitives et d’orienter immédiatement les visiteurs.</p></div>
+    <div class="faq-list">
+      <details open><summary>Comment rejoindre le réseau du CNJ ?</summary><p>Une organisation peut soumettre ses informations via le formulaire d’enregistrement puis suivre le processus de validation.</p></details>
+      <details><summary>Comment accéder aux opportunités ?</summary><p>Le catalogue permet de rechercher et filtrer les offres par catégorie et par province.</p></details>
+      <details><summary>Peut-on participer sans être membre d’une organisation ?</summary><p>Les consultations, informations et opportunités peuvent être accessibles directement aux jeunes selon les conditions de chaque activité.</p></details>
+      <details><summary>À quoi sert l’Espace Jeunes ?</summary><p>Il centralise les favoris, candidatures, recommandations et futures alertes personnalisées.</p></details>
+      <details><summary>Comment publier une opportunité ?</summary><p>Le back-office prévoit un circuit de création, validation et publication des opportunités.</p></details>
     </div>
-    <div class="container footer-bottom"><span>© 2026 — Prototype de proposition CNJ-RDC</span><span>Données illustratives · Démonstration UX/UI</span><a href="/admin.html">Administration</a></div>
-  </footer>
+  </div>
+</section>
 
-  <div class="modal" id="modal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card"><button class="modal-close" data-close>×</button><div id="modalBody"></div></div></div>
-  <div class="toast" id="toast"></div>
-  <script src="/app.js"></script>
+<section class="section contact-section" id="contact">
+  <div class="container contact-grid">
+    <div>
+      <div class="eyebrow eyebrow--light"><span></span> Contact & orientation</div>
+      <h2>Besoin d’information ou d’accompagnement ?</h2>
+      <p>Le portail doit devenir le premier point d’entrée numérique vers le CNJ, ses services et son réseau territorial.</p>
+      <div class="contact-card"><small>SIÈGE NATIONAL</small><b>5058, Boulevard Sendwe</b><span>Q/Immo-Congo, C/Kalamu · Réf. ISS-KIN · Kinshasa, RDC</span></div>
+    </div>
+    <div class="contact-actions">
+      <button class="btn btn--gold btn--lg" data-open="contact">Envoyer un message</button>
+      <button class="btn btn--glass btn--lg" data-open="org">Enregistrer une organisation</button>
+      <a class="btn btn--glass btn--lg" href="/youth.html">Accéder à l’Espace Jeunes</a>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="container cta-panel reveal">
+    <div class="cta-copy"><small>RESTEZ CONNECTÉ</small><h2>Recevez les opportunités et informations utiles à la jeunesse.</h2><p>Newsletter, alertes et contenus ciblés selon vos centres d’intérêt.</p></div>
+    <form class="newsletter" id="newsletterForm"><input name="email" type="email" placeholder="Votre adresse e-mail" required><button class="btn btn--gold">S’inscrire →</button></form>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand"><div class="brand brand--footer"><div class="brand-logo"><img src="https://cnj.cd/wp-content/uploads/2025/10/LOGO-CNJ-BLACK-1-scaled.png" alt="CNJ-RDC"></div><div class="brand-copy"><strong>CNJ-RDC</strong><span>Conseil National de la Jeunesse</span></div></div><p>Informer. Connecter. Représenter. Mobiliser. Agir.</p></div>
+    <div><h4>Institution</h4><a href="#about">À propos</a><a href="#missions">Missions</a><a href="#governance">Gouvernance</a><a href="#network">Réseau national</a></div>
+    <div><h4>Jeunesse</h4><a href="#opportunities">Opportunités</a><a href="#participate">Consultations</a><a href="#organizations">Organisations</a><a href="/youth.html">Espace Jeunes</a></div>
+    <div><h4>Ressources</h4><a href="#news">Actualités</a><a href="#agenda">Agenda</a><a href="#documents">Documents</a><button class="text-link text-link--light" data-open="contact">Contact →</button></div>
+  </div>
+  <div class="container footer-bottom"><span>© 2026 — Prototype de proposition CNJ-RDC</span><span>Informations institutionnelles : cnj.cd · Données de démonstration clairement signalées</span><a href="/admin.html">Administration</a></div>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-card"><button class="modal-close" data-close>×</button><div id="modalBody"></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="/app.js"></script>
 </body>
 </html>
